@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../aplicacion/static/css/style2.css">
+  <title>Formulario de Dispositivos</title>
+</head>
+<body>
+  <div class="formulario">
+    <h1>Información del Dispositivo</h1>
+
+    <form action="resultados.html" method="post">
+      <label for="cantidadDispositivos">Cuantos dispositivos tiene?</label>
+      <input type="number" id="cantidadDispositivos" name="cantidadDispositivos" required>
+
+      <label for="consumoEnergia">Cuanta energía (KW) consume por hora?</label>
+      <input type="number" id="consumoEnergia" name="consumoEnergia" step="0.01" required>
+
+      <label for="horasUso">Cuantas horas desea usarlo?</label>
+      <input type="number" id="horasUso" name="horasUso" step="0.01" required>
+
+      <a href="generarInforme.html" class="continuar-boton">Continuar</a>
+    </form>
+  </div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+body {
+    background: linear-gradient(to bottom, #d467ff, #59b4ff);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-color: #f0f0f0;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+  }
+
+  .factura {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  h1 {
+    color: #333;
+  }
+
+  .info-cliente {
+    margin-bottom: 20px;
+  }
+
+   .info-cliente p {
+    margin: 5px 0;
+    font-size: 16px;
+  }
+
+  .detalle-factura {
+    margin-top:20px;
+  }
