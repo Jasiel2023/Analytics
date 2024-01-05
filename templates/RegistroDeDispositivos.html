@@ -4,36 +4,41 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="{% static 'css/style1.css' %}">
+  <link rel="stylesheet" href="style1.css">
   <title>Registro de dispositivos</title>
 </head>
 <body>
   <div class="contenido">
     <h1>Registra tus dispositivos</h1>
-    <button class="boton">Aire Acondicionado</button>
-    <button class="boton">Aspiradora</button>
-    <button class="boton">Cafetera</button>
-    <button class="boton">Celular</button>
-    <button class="boton">Computadora</button>
-    <button class="boton">Consola</button>
-    <button class="boton">Ducha</button>
-    <button class="boton">Equipo de sonido</button>
-    <button class="boton">Foco</button>
-    <button class="boton">Impresora</button>
-    <button class="boton">Lampara</button>
-    <button class="boton">LapTop</button>
-    <button class="boton">Lavadora</button>
-    <button class="boton">Licuadora</button>
-    <button class="boton">Microondas</button>
-    <button class="boton">Plancha</button>
-    <button class="boton">Refrigeradora</button>
-    <button class="boton">Router</button>
-    <button class="boton">Secadora</button>
-    <button class="boton">Television</button>
-    <button class="boton">Tostadora</button>
-    <button class="boton">Ventilador</button>
-    <button class="boton">Otros...</button>
+    <button class="boton" onclick="toggleSelection(this)">Aire Acondicionado</button>
+    <button class="boton" onclick="toggleSelection(this)">Aspiradora</button>
+    <button class="boton" onclick="toggleSelection(this)">Cafetera</button>
+    <button class="boton" onclick="toggleSelection(this)">Celular</button>
+    <button class="boton" onclick="toggleSelection(this)">Computadora</button>
+    <button class="boton" onclick="toggleSelection(this)">Consola</button>
+    <button class="boton" onclick="toggleSelection(this)">Ducha</button>
+    <button class="boton" onclick="toggleSelection(this)">Equipo de sonido</button>
+    <button class="boton" onclick="toggleSelection(this)">Foco</button>
+    <button class="boton" onclick="toggleSelection(this)">Impresora</button>
+    <button class="boton" onclick="toggleSelection(this)">Lampara</button>
+    <button class="boton" onclick="toggleSelection(this)">LapTop</button>
+    <button class="boton" onclick="toggleSelection(this)">Lavadora</button>
+    <button class="boton" onclick="toggleSelection(this)">Licuadora</button>
+    <button class="boton" onclick="toggleSelection(this)">Microondas</button>
+    <button class="boton" onclick="toggleSelection(this)">Plancha</button>
+    <button class="boton" onclick="toggleSelection(this)">Refrigeradora</button>
+    <button class="boton" onclick="toggleSelection(this)">Router</button>
+    <button class="boton" onclick="toggleSelection(this)">Secadora</button>
+    <button class="boton" onclick="toggleSelection(this)">Television</button>
+    <button class="boton" onclick="toggleSelection(this)">Tostadora</button>
+    <button class="boton" onclick="toggleSelection(this)">Ventilador</button>
+    <button class="boton" onclick="toggleSelection(this)">Otros...</button>
     <a href="informacionDispositivo.html" class="continuar-boton">Continuar</a>
   </div>
+  <script>
+    function toggleSelection(button) {
+      button.classList.toggle("seleccionado");
+    }
+  </script>
 </body>
 </html>
