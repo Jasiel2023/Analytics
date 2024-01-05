@@ -1,48 +1,58 @@
 body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(to bottom, #d467ff, #59b4ff);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
     margin: 0;
-}
-.formulario {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-.formulario h1 {
-    margin-bottom: 20px;
-    color: #333;
-}
-input[type="text"],
-input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
 }
 
-input[type="submit"] {
+.formulario {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+}
+
+.formulario h1 {
+    color: #6C3483;
+    margin-bottom: 20px;
+}
+
+.formulario input {
     width: 100%;
     padding: 10px;
-    margin: 10px 0;
+    margin-bottom: 15px;
     box-sizing: border-box;
-    border: none;
-    border-radius: 5px;
-    background-color: #8d8d8d;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+}
+
+.formulario input[type="submit"] {
+    background: #6C3483;
     color: white;
     cursor: pointer;
 }
-input[type="submit"]:hover {
-    background-color: #8d8d8d;
+
+.formulario input[type="submit"]:hover {
+    background: #512E5F;
 }
-registrarse{
-    margin-top: 20px;
-  color:#666;
+
+.formulario .registrarse {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.formulario .registrarse a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+.formulario .registrarse a:hover {
+    text-decoration:underline;
 }
