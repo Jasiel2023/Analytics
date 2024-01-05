@@ -41,8 +41,24 @@ class DISPOSITIVOS(models.Model):
     ASPIRADORA = models.BooleanField()
     REFRIGERADORA = models.BooleanField()
     TELEVISOR = models.BooleanField()
+    CAFETERA = models.BooleanField()
+    CELULAR = models.BooleanField()
+    CONSOLA = models.BooleanField()
+    EQUIPO_DE_SONIDO = models.BooleanField()
     DUCHA_ELECTRICA = models.BooleanField()
+    FOCO = models.BooleanField()
+    IMPRESORA = models.BooleanField()
+    LAMPARA = models.BooleanField()
+    LAPTOP = models.BooleanField()
+    LAVADORA = models.BooleanField()
+    LICUADORA = models.BooleanField()
+    MICROONDAS = models.BooleanField()
+    PLANCHA = models.BooleanField()
+    ROUTER = models.BooleanField()
+    SECADORA = models.BooleanField()
+    TOSTADOR = models.BooleanField()
+    VENTILADOR = models.BooleanField()
+    DUCHA_ELECTRICA = models.BooleanField()
+
     def __str__(self):
         return self.AIRE_ACONDICIONADO
-
-
