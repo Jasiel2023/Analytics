@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
-    <link rel="stylesheet" href="../aplicacion/static/css/style4.css">
+    <link rel="stylesheet" href="{% static 'css/style4.css' %}">
 </head>
 
 <body>
@@ -16,7 +17,7 @@
             <input type="password" placeholder="Contraseña" required>
             <input type="submit" value="Registrar">
             <div class="registrarse">
-                ¿Ya tienes una cuenta? <a href="index.html">Inicia sesión</a>
+                ¿Ya tienes una cuenta? <a href="">Inicia sesión</a>
             </div>
         </form>
     </div>

@@ -19,9 +19,9 @@ def FormularioDeDispositivos(request):
 
 def GenerarInforme(request):
     informe = Informe.objects.all()
-    return render(request, {'informe':informe})
+    return render(request, 'GenerarInforme.html', {'informe':informe})
 
 def registro(request):
    registro = Usuario.objects.all()
-   return render(request, {'registro':registro})
+   return render(request, 'registro.html', {'registro':registro})
 
