@@ -39,7 +39,7 @@ h1 {
   color: #fff;
 }
 
-continuar-boton {
+.continuar-boton {
   text-decoration: none;
   position: fixed;
   bottom: 20px;
@@ -56,5 +56,9 @@ continuar-boton {
 
 .continuar-boton:hover {
   background-color: #fff;
-  color:#333;
+  color: #333;
+}
+.boton.seleccionado {
+    background-color: #654caf;
+    color: white;
 }
