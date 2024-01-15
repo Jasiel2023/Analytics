@@ -25,3 +25,6 @@ def registro(request):
    registro = Usuario.objects.all()
    return render(request, 'registro.html', {'registro':registro})
 
+def inicio(request):
+    return render(request, 'inicio.html')
+

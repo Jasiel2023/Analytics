@@ -5,7 +5,7 @@ body {
   background-repeat: no-repeat;
   background-position: center center;
   background-attachment: fixed;
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial Black";
 }
 
 .contenido {
@@ -17,11 +17,12 @@ body {
 }
 
 h1 {
+  font-family: "Arial Black";
   color: #010000;
 }
 
 .boton {
-  display: inline-block;
+  display: inline-table;
   margin: 10px;
   padding: 10px 20px;
   border: 2px solid #fff;
@@ -60,5 +61,5 @@ h1 {
 }
 .boton.seleccionado {
     background-color: #654caf;
-    color: white;
+   color:white;
 }
