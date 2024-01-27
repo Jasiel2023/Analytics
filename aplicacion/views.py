@@ -4,10 +4,16 @@ from aplicacion.models import DISPOSITIVOS
 from aplicacion.models import Usuario
 from aplicacion.models import registroDispositivos
 from aplicacion.models import Informe
+
+
+
 def index(request):
+    return render(request, 'index.html')
+
+def login(request):
     dispositivos = DISPOSITIVOS.objects.all()
     usuario = Usuario.objects.all()
-    return render(request, 'index.html', {'usuario': usuario})
+    return render(request, 'login.html', {'usuario': usuario})
 
 def RegistroDeDispositivos(request):
     dispositivos = DISPOSITIVOS.objects.all()

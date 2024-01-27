@@ -21,6 +21,7 @@ from aplicacion import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('login/',  views.login, name= 'login'),
     path('index/', views.index, name='index'),
     path('FormularioDeDispositivos/', views.FormularioDeDispositivos, name='Dispositivos'),
     path('GenerarInforme/', views.GenerarInforme, name='informe'),
