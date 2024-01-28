@@ -1,4 +1,6 @@
-from django.forms import ModelForm
-from aplicacion.models import Usuario, MedidorDeConsumo, Informe, DISPOSITIVOS,Registro
+#from django import forms
 
-#class UsuarioForm(ModelForm):
+#class LoginForm(forms.Form):
+ #   username = forms.CharField()
+  #  password = forms.CharField(widget=forms.PasswordInput)
+
