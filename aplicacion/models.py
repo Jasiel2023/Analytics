@@ -68,8 +68,5 @@ class registroDispositivos(models.Model):
 #   def __str__(self):
 #       return self.dispositivo
 
-<<<<<<< HEAD
-=======
-    def __str__(self):
-        return self.AIRE_ACONDICIONADO
->>>>>>> 095067e8ad10e090cd0ecafef37f4213621786c5
+
+
