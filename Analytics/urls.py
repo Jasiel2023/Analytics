@@ -21,9 +21,11 @@ from aplicacion import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index, name='index'),
+    path('login/',  views.login, name= 'login'),
+    path('index/', views.index, name='index'),
     path('FormularioDeDispositivos/', views.FormularioDeDispositivos, name='Dispositivos'),
     path('GenerarInforme/', views.GenerarInforme, name='informe'),
     path('RegistroDeDispositivos/', views.RegistroDeDispositivos, name='RegistroDeDispositivos'),
     path('Registro/', views.registro, name='registro'),
+    path('Inicio/', views.inicio, name='inicio')
 ]
