@@ -12,6 +12,7 @@ class Usuario(models.Model):
 
 class Registro(models.Model):
     registro = models.CharField(max_length=80)
+    dispositivos = models.ForeignKey(DISPOSITIVOS, on_delete=models.CASCADE, related_name="registro")
     def __str__(self):
         return self.registro
 
@@ -67,3 +68,8 @@ class registroDispositivos(models.Model):
 #   def __str__(self):
 #       return self.dispositivo
 
+<<<<<<< HEAD
+=======
+    def __str__(self):
+        return self.AIRE_ACONDICIONADO
+>>>>>>> 095067e8ad10e090cd0ecafef37f4213621786c5
