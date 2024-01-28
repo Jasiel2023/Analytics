@@ -15,17 +15,20 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from aplicacion import views
-
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('login/',  views.login, name= 'login'),
-    path('index/', views.index, name='index'),
-    path('FormularioDeDispositivos/', views.FormularioDeDispositivos, name='Dispositivos'),
-    path('GenerarInforme/', views.GenerarInforme, name='informe'),
-    path('RegistroDeDispositivos/', views.RegistroDeDispositivos, name='RegistroDeDispositivos'),
-    path('Registro/', views.registro, name='registro'),
-    path('Inicio/', views.inicio, name='inicio')
+    path('aplicacion/', include('aplicacion.urls'))
+    #path('login/',  views.login, name= 'login'),
+    #path('login/', auth_views.LoginView.as_view(), name='login'),
+    #path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    #path('index/', views.index, name='index'),
+    #path('FormularioDeDispositivos/', views.FormularioDeDispositivos, name='Dispositivos'),
+    #path('GenerarInforme/', views.GenerarInforme, name='informe'),
+    #path('RegistroDeDispositivos/', views.RegistroDeDispositivos, name='RegistroDeDispositivos'),
+    #path('Registro/', views.registro, name='registro'),
+    #path('Inicio/', views.inicio, name='inicio')
 ]
