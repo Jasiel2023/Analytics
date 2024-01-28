@@ -1,6 +1,6 @@
-#from django import forms
-
-#class LoginForm(forms.Form):
- #   username = forms.CharField()
-  #  password = forms.CharField(widget=forms.PasswordInput)
-
+from django.forms import ModelForm
+from .models import Informe
+class InformeForm(ModelForm):
+    class meta:
+        model = Informe
+        fields = ['fechaAnalisis']

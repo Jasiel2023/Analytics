@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Bienvenido al Sistema</h1>
+
+    <nav>
+    <u1>
+        {% if user.is_authenticated %}
+        <li>
+           <a href="/cerrarSesion">Cerrar Sesion</a>
+           <a href="/GenerarInforme">Ver informe</a>
+        </li>
+            {% else %}
+            <li>
+            <a href="/Registro">Registrate</a>
+             <a href="/iniciarSesion">Iniciar Sesion</a>
+        </li>
+        {% endif %}
+
+    </u1>
+
+
+    </nav>
+{% endblock %}
