@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'aplicacion.apps.AplicacionConfig'
+    #'aplicacion.apps.AplicacionConfig'
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'aplicacion'
-     'widget_tweaks'
+     #'widget_tweaks'
 ]
 
 MIDDLEWARE = [
@@ -125,6 +125,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-LOGIN_REDIRECT_URL = 'RegistroDeDispositivos'
-LOGIN_URL = 'login'
-LOGOUT_URL = 'logout'
+#LOGIN_REDIRECT_URL = 'RegistroDeDispositivos'
+#LOGIN_URL = 'login'
+#LOGOUT_URL = 'logout'

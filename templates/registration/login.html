@@ -10,13 +10,7 @@
 </head>
 <body>
     <div class="formulario">
-        <form action="{% url 'login' %}" method="post">
-            {% load widget_tweaks %}
-            {% for field in form %}
-            {{ field.label_tag }}
-            {% render_field field class +="input mt-2" %}
-            {% endfor %}
-            {% csrf_token %}
+        <!--form action="{% url 'login' %}" method="post"-->
         </form>
         <h1>Inicio de sesion</h1>
         <form method="post">
@@ -34,8 +28,8 @@
                 ¿Desea Registarse? haga clic aqui <a href="Registro/">Regístrate</a>
             </div>
         </form>
-    <input type="submit" value="Log-in" class="button mt-2">
-    <input type="hidden" name="next" value="{{ next }}" />
+    <!--input type="submit" value="Log-in" class="button mt-2">
+    <input type="hidden" name="next" value="{{ next }}" /-->
     </div>
 </body>
 </html>

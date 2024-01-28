@@ -10,31 +10,31 @@ from aplicacion.models import Usuario, MedidorDeConsumo, Informe, DISPOSITIVOS,R
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from .forms import LoginForm
+#from .forms import LoginForm
 
-def user_login(request):
-    if request.methodo == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            cd = form.cleaned_data
-            user = authenticate(request,
-                                username = cd['username'],
-                                password = cd['password']) #NONE
-            if user is not None:
-                if user.is_active:
-                    login(request, user)
-                    return HttpResponse('Usuario autenticado')
-                else:
-                    return HttpResponse('El usuario no esta activo')
-            else:
-                return HttpResponse('La informacion no es corecta')
-    else:
-        form = LoginForm()
-        return render(request, 'login.html', {'form': form})
+#def user_login(request):
+#   if request.methodo == 'POST':
+#       form = LoginForm(request.POST)
+#       if form.is_valid():
+#           cd = form.cleaned_data
+#           user = authenticate(request,
+#                               username = cd['username'],
+#                               password = cd['password']) #NONE
+#           if user is not None:
+#               if user.is_active:
+#                   login(request, user)
+#                   return HttpResponse('Usuario autenticado')
+ #               else:
+#                  return HttpResponse('El usuario no esta activo')
+ #           else:
+#              return HttpResponse('La informacion no es corecta')
+ #   else:
+#      form = LoginForm()
+#       return render(request, 'login.html', {'form': form})
 
-@login_required
-def RegistroDeDispositivos(request):
-    return render(request, 'aplicacion/RegistroDeDispositivos.html')
+#@login_required
+#def RegistroDeDispositivos(request):
+ #   return render(request, 'aplicacion/RegistroDeDispositivos.html')
 
 
 

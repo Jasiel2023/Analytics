@@ -21,14 +21,12 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('aplicacion/', include('aplicacion.urls'))
-    #path('login/',  views.login, name= 'login'),
-    #path('login/', auth_views.LoginView.as_view(), name='login'),
-    #path('logout/', auth_views.LogoutView.as_view(), name='logout'),
-    #path('index/', views.index, name='index'),
-    #path('FormularioDeDispositivos/', views.FormularioDeDispositivos, name='Dispositivos'),
-    #path('GenerarInforme/', views.GenerarInforme, name='informe'),
-    #path('RegistroDeDispositivos/', views.RegistroDeDispositivos, name='RegistroDeDispositivos'),
-    #path('Registro/', views.registro, name='registro'),
-    #path('Inicio/', views.inicio, name='inicio')
+    #path('aplicacion/', include('aplicacion.urls'))
+    path('login/',  views.login, name= 'login'),
+    path('', views.index, name='index'),
+    path('FormularioDeDispositivos/', views.FormularioDeDispositivos, name='Dispositivos'),
+    path('GenerarInforme/', views.GenerarInforme, name='informe'),
+    path('RegistroDeDispositivos/', views.RegistroDeDispositivos, name='RegistroDeDispositivos'),
+    path('Registro/', views.registro, name='registro'),
+    path('Inicio/', views.inicio, name='inicio')
 ]
