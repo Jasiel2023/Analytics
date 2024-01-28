@@ -1,67 +1,72 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import Analytics
-from aplicacion.models import DISPOSITIVOS
+#from aplicacion.models import DISPOSITIVOS
 from aplicacion.models import Usuario
 from aplicacion.models import registroDispositivos
 from aplicacion.models import Informe
+from .forms import InformeForm
 
 from django.forms import ModelForm
-from aplicacion.models import Usuario, MedidorDeConsumo, Informe, DISPOSITIVOS,Registro
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
-#from .forms import LoginForm
-
-#def user_login(request):
-#   if request.methodo == 'POST':
-#       form = LoginForm(request.POST)
-#       if form.is_valid():
-#           cd = form.cleaned_data
-#           user = authenticate(request,
-#                               username = cd['username'],
-#                               password = cd['password']) #NONE
-#           if user is not None:
-#               if user.is_active:
-#                   login(request, user)
-#                   return HttpResponse('Usuario autenticado')
- #               else:
-#                  return HttpResponse('El usuario no esta activo')
- #           else:
-#              return HttpResponse('La informacion no es corecta')
- #   else:
-#      form = LoginForm()
-#       return render(request, 'login.html', {'form': form})
-
-#@login_required
-#def RegistroDeDispositivos(request):
- #   return render(request, 'aplicacion/RegistroDeDispositivos.html')
-
-
-
+from aplicacion.models import Usuario, MedidorDeConsumo, Informe,Registro
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.models import User
+from django.contrib.auth import login, logout, authenticate
+from django.db import IntegrityError
 def index(request):
     return render(request, 'index.html')
 
-def login(request):
-    dispositivos = DISPOSITIVOS.objects.all()
-    usuario = Usuario.objects.all()
-    return render(request, 'login2.html', {'usuario': usuario})
+def registro(request):
+    if request.method == 'GET':
+        return render(request, 'registro.html', {'form': UserCreationForm})
+    else:
+        if request.POST['password1'] == request.POST['password2']:
+            try:
+                user = User.objects.create_user(username=request.POST['username'],
+                                                password=request.POST['password1'])
+                user.save()
+                login(request, user)
+                return redirect('presentacion')
+            except IntegrityError:
+                return render(request, 'registro.html', {'form': UserCreationForm,
+                                              "error": 'Username ya existe'})
+        return render(request, 'registro.html', {'form': UserCreationForm,
+                                                 "error": 'Contraseña no coincide'})
+
 
 def RegistroDeDispositivos(request):
-    dispositivos = DISPOSITIVOS.objects.all()
-    return render(request, 'RegistroDeDispositivos.html', {'dispositivos':dispositivos})
+    #dispositivos = DISPOSITIVOS.objects.all()
+    return render(request, 'RegistroDeDispositivos.html')
 
 def FormularioDeDispositivos(request):
     registro = registroDispositivos.objects.all()
     return render(request, 'FormularioDeDispositivos.html', {'registro': registro})
 
 def GenerarInforme(request):
-    informe = Informe.objects.all()
-    return render(request, 'GenerarInforme.html', {'informe':informe})
+    return render(request, 'GenerarInforme.html', {
+        'form' : InformeForm })
 
-def registro(request):
-   registro = Usuario.objects.all()
-   return render(request, 'registro.html', {'registro':registro})
 
 def inicio(request):
     return render(request, 'inicio.html')
 
+def presentacion(request):
+    return render(request, 'presentacion.html')
+
+def cerrarSesion(request):
+    logout(request)
+    return redirect('iniciarSesion')
+
+def iniciarSesion(request):
+    if request.method == 'GET':
+         return render(request, 'iniciarSesion.html',
+                  {'form': AuthenticationForm})
+    else:
+        user = authenticate(request, username=request.POST['username'],
+                     password=request.POST['password'])
+        if user is None:
+            return render(request, 'iniciarSesion.html',
+                          {'form': AuthenticationForm,
+                           'error': 'Usuario o contraseña es incorrecta'})
+        else:
+            login(request, user)
+            return redirect('presentacion')

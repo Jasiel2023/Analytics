@@ -3,12 +3,14 @@ from .models import Usuario
 from .models import Informe
 from .models import MedidorDeConsumo
 from .models import Registro
-from .models import registroDispositivos
-from .models import DISPOSITIVOS
+#from .models import RegistroDeDispositivos
+
 # Register your models here.
+
+
 admin.site.register(Usuario)
 admin.site.register(Informe)
 admin.site.register(MedidorDeConsumo)
 admin.site.register(Registro)
-admin.site.register(DISPOSITIVOS)
+#admin.site.register(RegistroDeDispositivos)
 

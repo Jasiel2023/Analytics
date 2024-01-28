@@ -1,5 +1,6 @@
+from enum import Enum
 from django.db import models
-
+from django.contrib.auth.models import User
 # Create your models here.
 class Usuario(models.Model):
     nombre = models.CharField(max_length=50)
@@ -22,12 +23,13 @@ class MedidorDeConsumo(models.Model):
 
 class Informe(models.Model):
     fechaAnalisis = models.DateField()
-    infoUsuario = models.CharField(max_length=80)
-    resultadosAlmacenados = models.CharField(max_length=500)
-    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name="informe_list")
-    medidorDeConsumo = models.ForeignKey(MedidorDeConsumo, on_delete=models.CASCADE, related_name="medidorDeConsumo")
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    #resultadosAlmacenados = models.CharField(max_length=500)
+   # usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name="informe_list")
+   # medidorDeConsumo = models.ForeignKey(MedidorDeConsumo, on_delete=models.CASCADE, related_name="medidorDeConsumo")
     def __str__(self):
-        return self.__fechaAnalisis
+        return self.user.username
 
 class registroDispositivos(models.Model):
     consumoKwh = models.FloatField()
@@ -36,29 +38,32 @@ class registroDispositivos(models.Model):
     def __str__(self):
         return self.consumoKwh
 
-class DISPOSITIVOS(models.Model):
-    AIRE_ACONDICIONADO = models.BooleanField()
-    ASPIRADORA = models.BooleanField()
-    REFRIGERADORA = models.BooleanField()
-    TELEVISOR = models.BooleanField()
-    CAFETERA = models.BooleanField()
-    CELULAR = models.BooleanField()
-    CONSOLA = models.BooleanField()
-    EQUIPO_DE_SONIDO = models.BooleanField()
-    DUCHA_ELECTRICA = models.BooleanField()
-    FOCO = models.BooleanField()
-    IMPRESORA = models.BooleanField()
-    LAMPARA = models.BooleanField()
-    LAPTOP = models.BooleanField()
-    LAVADORA = models.BooleanField()
-    LICUADORA = models.BooleanField()
-    MICROONDAS = models.BooleanField()
-    PLANCHA = models.BooleanField()
-    ROUTER = models.BooleanField()
-    SECADORA = models.BooleanField()
-    TOSTADOR = models.BooleanField()
-    VENTILADOR = models.BooleanField()
-    DUCHA_ELECTRICA = models.BooleanField()
+#class Dispositivos(Enum):
+ #   AIRE_ACONDICIONADO = models.BooleanField(False)
+    #  ASPIRADORA = models.BooleanField(False)
+    #   REFRIGERADORA = models.BooleanField(False)
+    #TELEVISOR = models.BooleanField(False)
+    #CAFETERA = models.BooleanField(False)
+    #CELULAR = models.BooleanField(False)
+    #CONSOLA = models.BooleanField(False)
+    #EQUIPO_DE_SONIDO = models.BooleanField(False)
+    #DUCHA_ELECTRICA = models.BooleanField(False)
+    #FOCO = models.BooleanField(False)
+    #IMPRESORA = models.BooleanField(False)
+    #LAMPARA = models.BooleanField(False)
+    #LAPTOP = models.BooleanField(False)
+    #LAVADORA = models.BooleanField(False)
+    #LICUADORA = models.BooleanField(False)
+    #MICROONDAS = models.BooleanField(False)
+    # PLANCHA = models.BooleanField(False)
+    #ROUTER = models.BooleanField(False)
+    #SECADORA = models.BooleanField(False)
+    #TOSTADOR = models.BooleanField(False)
+    #VENTILADOR = models.BooleanField(False)
 
-    def __str__(self):
-        return self.AIRE_ACONDICIONADO
+#class RegistroDeDispositivos(models.Model):
+    #   dispositivo = models.CharField(max_length=20, choices=[(tag.name, tag.value) for tag in Dispositivos])
+
+#   def __str__(self):
+#       return self.dispositivo
+
