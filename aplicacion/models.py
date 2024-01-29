@@ -12,7 +12,6 @@ class Usuario(models.Model):
 
 class Registro(models.Model):
     registro = models.CharField(max_length=80)
-    dispositivos = models.ForeignKey(DISPOSITIVOS, on_delete=models.CASCADE, related_name="registro")
     def __str__(self):
         return self.registro
 

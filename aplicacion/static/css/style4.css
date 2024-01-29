@@ -1,8 +1,8 @@
-body {
+  body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to bottom, #d467ff, #59b4ff);
     margin: 0;
     padding: 0;
-    font-family: 'Arial', sans-serif;
-    background: #f4f4f4;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -10,49 +10,50 @@ body {
 }
 
 .formulario {
-    background: white;
+    background-color: #fff;
+    padding: 30px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    width: 300px;
     text-align: center;
+    width: 600px;
+    margin: auto;
+}
+h1 {
+    color: #9b9b9b;
 }
 
-.formulario h1 {
-    color: #6C3483;
-    margin-bottom: 20px;
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.formulario input {
+input[type="text"],
+input[type="password"],
+button {
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
+    border: 2px solid #9b9b9b;
     border-radius: 4px;
     outline: none;
 }
 
-.formulario input[type="submit"] {
-    background: #6C3483;
-    color: white;
+button {
+    background-color: #9b9b9b;
+    color: #fff;
     cursor: pointer;
 }
 
-.formulario input[type="submit"]:hover {
-    background: #512E5F;
+button:hover {
+    background-color: #9b9b9b;
 }
 
-.formulario .registrarse {
-    margin-top: 15px;
-    font-size: 14px;
-}
-
-.formulario .registrarse a {
-    color: #3498db;
+.registrarse a {
+    color: #9b9b9b;
     text-decoration: none;
+    font-weight: bold;
 }
-
-.formulario .registrarse a:hover {
-    text-decoration:underline;
+.registrarse a:hover {
+    text-decoration: underline;
 }
