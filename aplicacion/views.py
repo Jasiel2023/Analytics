@@ -46,7 +46,7 @@ def GenerarInforme(request):
         'form' : InformeForm })
 
 
-def inicio(request):
+def inicio(request):#ojo a esto
     return render(request, 'inicio.html')
 
 def presentacion(request):
