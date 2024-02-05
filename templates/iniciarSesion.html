@@ -7,9 +7,80 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+<style>
+ body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(to bottom, #d467ff, #59b4ff);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            color: #333;
+            flex-direction: column;
+        }
+
+        .center-text {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            text-align: center;
+            position: relative;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        button {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            outline: none;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus,
+        button:focus {
+            border-color: #9b9b9b;
+        }
+
+        button {
+            background-color: #9b9b9b;
+            color: #fff;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0e8ca6;
+        }
+    u1 {
+    list-style-type: none;
+}
+a {
+    text-decoration: none;
+    color: #000;
+    }
+</style>
 </head>
 <body>
+
+
   {{ error }}
+
     <nav>
         <u1>
              {% if user.is_authenticated %}
@@ -23,12 +94,11 @@
         {% endif %}
         </u1>
     </nav>
-    <form method="POST">
+<form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
         <button>
             Iniciar Sesion
-        </button>
     </form>
 </body>
 </html>

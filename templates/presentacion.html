@@ -1,25 +1,105 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
 
-<h1>Bienvenido al Sistema</h1>
+        .welcome-container {
+            text-align: center;
+            margin: 50px;
+        }
 
-    <nav>
-    <u1>
-        {% if user.is_authenticated %}
-        <li>
-           <a href="/cerrarSesion">Cerrar Sesion</a>
-           <a href="/GenerarInforme">Ver informe</a>
-        </li>
-            {% else %}
-            <li>
-            <a href="/Registro">Registrate</a>
-             <a href="/iniciarSesion">Iniciar Sesion</a>
-        </li>
-        {% endif %}
+        h1 {
+            color: #3498db;
+        }
 
-    </u1>
+        .paragraph {
+            color: #555;
+            font-size: 18px;
+            margin-bottom: 20px;
+            text-align: justify;
+            margin-top: 20px;
+        }
 
+        .instruction {
+            font-weight: bold;
+        }
 
-    </nav>
+        nav {
+            margin-top: 20px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #555;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: #3498db;
+        }
+    </style>
+
+    <div class="welcome-container">
+        <h1>Bienvenido al Sistema</h1>
+
+        <div class="paragraph">
+            Este programa te permitirá calcular el consumo eléctrico de
+            tus dispositivos para verificar y ahorrar la mayor energía
+            posible, contribuyendo de manera
+            efectiva al consumo energético eficiente.
+        </div>
+
+        <div class="paragraph instruction">
+            Para ello, el programa te permitirá elegir entre diversos
+            dispositivos comunes en los hogares.
+        </div>
+
+        <div class="paragraph instruction">
+            Después debe seleccionar el dispositivo electrónico del cual deseé
+            tener información.
+        </div>
+
+        <div class="paragraph instruction">
+            Deberá ingresar las horas que deseas utilizarlo y la
+            cantidad de energía que consume.
+        </div>
+
+        <div class="paragraph instruction">
+            Una vez completado el formulario, podrá visualizar el
+            consumo estimado de energía para el dispositivo seleccionado.
+        </div>
+
+        <nav>
+            <ul>
+                {% if user.is_authenticated %}
+                    <li>
+                        <a href="/cerrarSesion">Cerrar Sesión</a>
+                        <a href="/GenerarInforme">Ver Informe</a>
+                    </li>
+                {% else %}
+                    <li>
+                        <a href="/Registro">Regístrate</a>
+                        <a href="/iniciarSesion">Iniciar Sesión</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
 {% endblock %}
