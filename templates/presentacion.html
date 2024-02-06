@@ -37,6 +37,7 @@
         ul {
             list-style: none;
             padding: 0;
+            text-align: center;
         }
 
         li {
@@ -44,15 +45,34 @@
             margin-right: 20px;
         }
 
-        a {
-            text-decoration: none;
-            color: #555;
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
             font-weight: bold;
-            transition: color 0.3s;
+            text-decoration: none;
+            color: #fff;
+            background-color: #3498db;
+            border-radius: 5px;
+            transition: background-color 0.3s;
         }
 
-        a:hover {
-            color: #3498db;
+        .btn:hover {
+            background-color: #207ab2;
+        }
+
+        @media (max-width: 768px) {
+            .paragraph {
+                font-size: 16px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .btn {
+                padding: 8px 16px;
+            }
         }
     </style>
 
@@ -60,43 +80,36 @@
         <h1>Bienvenido al Sistema</h1>
 
         <div class="paragraph">
-            Este programa te permitirá calcular el consumo eléctrico de
-            tus dispositivos para verificar y ahorrar la mayor energía
-            posible, contribuyendo de manera
-            efectiva al consumo energético eficiente.
+            Este programa te permitirá calcular el consumo eléctrico de tus dispositivos para verificar y ahorrar la mayor energía posible, contribuyendo de manera efectiva al consumo energético eficiente.
         </div>
 
         <div class="paragraph instruction">
-            Para ello, el programa te permitirá elegir entre diversos
-            dispositivos comunes en los hogares.
+            Para ello, el programa te permitirá elegir entre diversos dispositivos comunes en los hogares.
         </div>
 
         <div class="paragraph instruction">
-            Después debe seleccionar el dispositivo electrónico del cual deseé
-            tener información.
+            Después debe seleccionar el dispositivo electrónico del cual deseé tener información.
         </div>
 
         <div class="paragraph instruction">
-            Deberá ingresar las horas que deseas utilizarlo y la
-            cantidad de energía que consume.
+            Deberá ingresar las horas que deseas utilizarlo y la cantidad de energía que consume.
         </div>
 
         <div class="paragraph instruction">
-            Una vez completado el formulario, podrá visualizar el
-            consumo estimado de energía para el dispositivo seleccionado.
+            Una vez completado el formulario, podrá visualizar el consumo estimado de energía para el dispositivo seleccionado.
         </div>
 
         <nav>
             <ul>
                 {% if user.is_authenticated %}
                     <li>
-                        <a href="/cerrarSesion">Cerrar Sesión</a>
-                        <a href="/GenerarInforme">Ver Informe</a>
+                        <a href="/cerrarSesion" class="btn">Cerrar Sesión</a>
+                        <a href="/GenerarInforme" class="btn">Ver Informe</a>
                     </li>
                 {% else %}
                     <li>
-                        <a href="/Registro">Regístrate</a>
-                        <a href="/iniciarSesion">Iniciar Sesión</a>
+                        <a href="/Registro" class="btn">Regístrate</a>
+                        <a href="/iniciarSesion" class="btn">Iniciar Sesión</a>
                     </li>
                 {% endif %}
             </ul>
