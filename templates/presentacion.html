@@ -9,6 +9,19 @@
             padding: 0;
         }
 
+        .navbar {
+            background-color: #3498db;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 20px;
+            font-size: 16px;
+        }
+
         .welcome-container {
             text-align: center;
             margin: 50px;
@@ -76,7 +89,13 @@
         }
     </style>
 
-    <div class="welcome-container">
+    <div class="navbar">
+        <a href="#" class="btn">Inicio</a>
+        <a href="#" class="btn">Inventario</a>
+        <a href="/GenerarInforme" class="btn">Informe</a>
+        <a href="#" class="btn">Diagramas</a>
+    </div>
+           <div class="welcome-container">
         <h1>Bienvenido al Sistema</h1>
 
         <div class="paragraph">
@@ -99,12 +118,13 @@
             Una vez completado el formulario, podrá visualizar el consumo estimado de energía para el dispositivo seleccionado.
         </div>
 
+
         <nav>
             <ul>
                 {% if user.is_authenticated %}
                     <li>
                         <a href="/cerrarSesion" class="btn">Cerrar Sesión</a>
-                        <a href="/GenerarInforme" class="btn">Ver Informe</a>
+
                     </li>
                 {% else %}
                     <li>
