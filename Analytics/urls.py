@@ -22,12 +22,12 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('iniciarSesion/',  views.iniciarSesion, name= 'iniciarSesion'),
-    path('', views.index, name='index'),
+    path('index/', views.index, name='index'),
     path('presentacion/', views.presentacion, name='presentacion'),
     path('FormularioDeDispositivos/', views.FormularioDeDispositivos, name='Dispositivos'),
     path('GenerarInforme/', views.GenerarInforme, name='GenerarInforme'),
     path('RegistroDeDispositivos/', views.RegistroDeDispositivos, name='RegistroDeDispositivos'),
-    path('Registro/', views.registro, name='registro'),
+    path('registro/', views.registro, name='registro'),
     path('cerrarSesion/', views.cerrarSesion, name='cerrarSesion'),
     path('Inicio/', views.inicio, name='inicio')
 ]
