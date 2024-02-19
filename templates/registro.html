@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es-ec">
 
 <head>
     <meta charset="UTF-8">
@@ -25,6 +25,7 @@
         });
     </script>
     <style>
+<<<<<<< HEAD
   body {
             font-family: 'Arial', sans-serif;
             background: linear-gradient(to bottom, #59b4ff, #ffaa5c) no-repeat center center fixed;
@@ -48,6 +49,35 @@
             position: relative;
             z-index: 1;
             margin-top: 20px;
+=======
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100%;
+    background-image: radial-gradient(circle at 74.47% 15.05%, #b3ffea 0, #9affe5 16.67%, 
+                #77f4dc 33.33%, #40e0cf 50%, #00ccc4 66.67%, #00bcbe 83.33%, #00b1bd 100%);
+    background-attachment: fixed;
+}
+
+
+.formulario {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 600px;
+    margin: auto;
+}
+h1 {
+    color: #9b9b9b;
+}
+>>>>>>> fc1af2fa10f3cbc294a1edff8efcb76473dd6531
 
         }
         .formulario::before {
@@ -112,15 +142,26 @@
 
 <body>
     <div class="formulario">
+<<<<<<< HEAD
+=======
+    <img src="{% static 'images/logoEA.png' %}" alt="logo">
+>>>>>>> fc1af2fa10f3cbc294a1edff8efcb76473dd6531
         <h1>Registro</h1>
         <form method="POST">
             {% csrf_token %}
             {{ form.as_p }}
             <button>Registrar</button>
         </form>
+<<<<<<< HEAD
         <div class="registrarse">
             ¿Ya tienes una cuenta? <a href="http://127.0.0.1:8000/iniciarSesion">Inicia sesión</a>
         </div>
+=======
+            <div class="registrarse">
+                ¿Ya tienes una cuenta? <a href="http://127.0.0.1:8000/iniciarSesion">Iniciar sesión</a>
+            </div>
+
+>>>>>>> fc1af2fa10f3cbc294a1edff8efcb76473dd6531
     </div>
 </body>
 
