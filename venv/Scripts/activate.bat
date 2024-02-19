@@ -1,4 +1,4 @@
-@set "VIRTUAL_ENV=C:\Users\Jorge\OneDrive\Documents\Estudiodetrabajo\Analytics\venv"
+@set "VIRTUAL_ENV=C:\Users\Usuario\Desktop\POO-PIS\Analytics\venv"
 
 @set "VIRTUAL_ENV_PROMPT="
 @if NOT DEFINED VIRTUAL_ENV_PROMPT (
