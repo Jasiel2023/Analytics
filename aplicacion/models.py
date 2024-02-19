@@ -38,34 +38,39 @@ class registroDispositivos(models.Model):
     def __str__(self):
         return self.consumoKwh
 
-#class Dispositivos(Enum):
- #   AIRE_ACONDICIONADO = models.BooleanField(False)
-    #  ASPIRADORA = models.BooleanField(False)
-    #   REFRIGERADORA = models.BooleanField(False)
-    #TELEVISOR = models.BooleanField(False)
-    #CAFETERA = models.BooleanField(False)
-    #CELULAR = models.BooleanField(False)
-    #CONSOLA = models.BooleanField(False)
-    #EQUIPO_DE_SONIDO = models.BooleanField(False)
-    #DUCHA_ELECTRICA = models.BooleanField(False)
-    #FOCO = models.BooleanField(False)
-    #IMPRESORA = models.BooleanField(False)
-    #LAMPARA = models.BooleanField(False)
-    #LAPTOP = models.BooleanField(False)
-    #LAVADORA = models.BooleanField(False)
-    #LICUADORA = models.BooleanField(False)
-    #MICROONDAS = models.BooleanField(False)
-    # PLANCHA = models.BooleanField(False)
-    #ROUTER = models.BooleanField(False)
-    #SECADORA = models.BooleanField(False)
-    #TOSTADOR = models.BooleanField(False)
-    #VENTILADOR = models.BooleanField(False)
+class DispositivoEnum(Enum):
+    AIRE_ACONDICIONADO = 'Aire Acondicionado'
+    ASPIRADORA = 'Aspiradora'
+    REFRIGERADORA = 'Refrigeradora'
+    TELEVISOR = 'Televisor'
+    CAFETERA = 'Cafetera'
+    CELULAR = 'Celular'
+    CONSOLA = 'Consola'
+    EQUIPO_DE_SONIDO = 'Equipo De Sonido'
+    DUCHA_ELECTRICA = 'Ducha Electrica'
+    FOCO = 'Foco'
+    IMPRESORA = 'Impresora'
+    LAMPARA = 'Lampara'
+    LAPTOP = 'Laptop'
+    LAVADORA = 'Lavadora'
+    LICUADORA = 'Licuadora'
+    BATIDORA= 'Batidora'
+    MICROONDAS = 'Microondas'
+    TOSTADOR = 'Tostador'
+    PLANCHA = 'Plancha'
+    ROUTER = 'Router'
+    SECADORA = 'Secadora'
+    VENTILADOR = 'Ventilador'
 
-#class RegistroDeDispositivos(models.Model):
-    #   dispositivo = models.CharField(max_length=20, choices=[(tag.name, tag.value) for tag in Dispositivos])
+class RegistroDeDispositivos(models.Model):
+    dispositivo = models.CharField(
+        max_length=50,
+        choices=[(tag.name, tag.value) for tag in DispositivoEnum]
+    )
 
-#   def __str__(self):
-#       return self.dispositivo
+    def __str__(self):
+        return self.dispositivo
+
 
 
 
