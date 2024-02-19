@@ -1,96 +1,145 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="es-ec">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
-    <link rel="stylesheet" href="{% static 'css/style4.css' %}">
+<link rel="stylesheet" href="{% static 'css/style4.css' %}">
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var errorMensaje = '{{ error }}';
+            if (errorMensaje) {
+                Swal.fire({
+                    icon: 'error',
+                    title: errorMensaje,
+                    showConfirmButton: true,
+                    confirmButtonText: 'Volver a intentar',
+                    customClass: {
+                        title: 'swal-title-sm',
+                    }
+                });
+            }
+        });
+    </script>
     <style>
+  body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #59b4ff, #ffaa5c) no-repeat center center fixed;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
 
-body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100%;
-    background-image: radial-gradient(circle at 74.47% 15.05%, #b3ffea 0, #9affe5 16.67%, 
-                #77f4dc 33.33%, #40e0cf 50%, #00ccc4 66.67%, #00bcbe 83.33%, #00b1bd 100%);
-    background-attachment: fixed;
-}
+        .formulario {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            width: 400px;
+            margin: auto;
+            position: relative;
+            position: relative;
+            z-index: 1;
+            margin-top: 20px;
 
+        }
+        .formulario::before {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 15%;
+            background-color: #000;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            z-index: -1;
+        }
 
-.formulario {
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    width: 600px;
-    margin: auto;
-}
-h1 {
-    color: #9b9b9b;
-}
+        h1 {
+        text-align: center;
+            color: #fff;
+            font-size: 24px;
+            margin-bottom: 50px;
+        }
 
-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+        input[type="text"],
+        input[type="password"],
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 2px solid #9b9b9b;
+            border-radius: 10px;
+            outline: none;
+            box-sizing: border-box;
+        }
 
-input[type="text"],
-input[type="password"],
-button {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 2px solid #9b9b9b;
-    border-radius: 4px;
-    outline: none;
-}
+        button {
+            background-color: #9b9b9b;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
 
-button {
-    background-color: #9b9b9b;
+        button:hover {
+            background-color: #757575;
+        }
+
+        .registrarse {
+        text-align: center;
+            color: #000;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .registrarse a {
+            color: #9b9b9b;
+            text-decoration: none;
+        }
+
+        .registrarse a:hover {
+            text-decoration: underline;
+        }
+  .boton-volver {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    padding: 10px 15px;
+    background-color: #757575;
     color: #fff;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #9b9b9b;
-}
-
-.registrarse a {
-    color: #9b9b9b;
     text-decoration: none;
-    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
-.registrarse a:hover {
-    text-decoration: underline;
+
+.boton-volver:hover {
+    background-color: #444;
 }
-</style>
+    </style>
 </head>
 
 <body>
     <div class="formulario">
-    <img src="{% static 'images/logoEA.png' %}" alt="logo">
         <h1>Registro</h1>
-        {{ error }}
         <form method="POST">
             {% csrf_token %}
             {{ form.as_p }}
-            <button>
-                Registrar
-            </button>
-
+            <button>Registrar</button>
         </form>
-            <div class="registrarse">
-                ¿Ya tienes una cuenta? <a href="http://127.0.0.1:8000/iniciarSesion">Iniciar sesión</a>
-            </div>
-
+        <div class="registrarse">
+            ¿Ya tienes una cuenta? <a href="http://127.0.0.1:8000/iniciarSesion">Inicia sesión</a>
+        </div>
     </div>
+<a href="http://127.0.0.1:8000" class="boton-volver">Volver</a>
 </body>
+
 </html>

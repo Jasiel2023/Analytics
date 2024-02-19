@@ -5,7 +5,7 @@ body {
 }
 
 .container {
-    background-image: url('fondoInicio.png');
+    background-image: url('fondoPagina.png');
     background-size: cover;
     background-position: center;
     height: 100vh;
@@ -16,12 +16,12 @@ body {
 }
 
 .logo {
-    height: 500px;
+    height: 400px;
     max-width: 500px;
     margin-right: 300px;
     margin-bottom: 20px;
     width: 800px;
-    background-image: url('logoEA.png');
+    background-image: url('logoBF.png');
     background-size: contain;
     background-repeat:no-repeat;
 }
