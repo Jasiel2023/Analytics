@@ -7,28 +7,125 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
+    <style>
+ body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    color: #333;
+    flex-direction: column;
+    background: linear-gradient(to bottom, #d467ff, #59b4ff) no-repeat center center fixed;
+    background-size: cover;
+}
+.center-text {
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1; /
+}
+
+form {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    text-align: center;
+    position: relative;
+    z-index: 0;
+}
+
+input[type="text"],
+input[type="password"],
+button {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    outline: none;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+button:focus {
+    border-color: #000;
+}
+
+button {
+    background-color: #808080;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    border: none;
+}
+button:hover {
+            background-color: #000;
+        }
+.registro-item {
+    list-style-type: none;
+}
+
+.registro-link {
+    color: #000;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.registro-link:hover {
+    text-decoration: underline;
+}
+
+    </style>
 <body>
-  {{ error }}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var errorMensaje = '{{ error }}';
+        if (errorMensaje) {
+            Swal.fire({
+                icon: 'error',
+                title: errorMensaje,
+                showConfirmButton: true,
+                confirmButtonText: 'Volver a intentar',
+                customClass: {
+                    title: 'swal-title-sm',
+                }
+            });
+        }
+    });
+</script>
     <nav>
+
+    </form>
         <u1>
-             {% if user.is_authenticated %}
-        <li>
-            <a href="/cerrarSesion">Cerrar sesion</a>
-        </li>
-            {% else %}
-            <li>
-            <a href="/registro">Registrarse</a>
-        </li>
-        {% endif %}
-        </u1>
-    </nav>
-    <form method="POST">
+            <form method="POST">
         {% csrf_token %}
         {{ form.as_p }}
         <button>
             Iniciar Sesion
         </button>
-    </form>
+            {% if user.is_authenticated %}
+                <li>
+                    <a href="/cerrarSesion">Cerrar sesion</a>
+                </li>
+            {% else %}
+                <li class="registro-item">
+                    <a href="/registro" class="registro-link">¿Desea registrarse?</a>
+                </li>
+            {% endif %}
+        </u1>
+    </nav>
+
+
 </body>
+
 </html>
