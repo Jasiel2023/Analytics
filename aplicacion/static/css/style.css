@@ -3,6 +3,7 @@ body {
     margin: 0;
     padding: 0;
     display: flex;
+    text-align: center;
     align-items: center;
     justify-content: center;
     height: 100vh;
@@ -11,7 +12,14 @@ body {
     background: linear-gradient(to bottom, #59b4ff, #ffaa5c) no-repeat center center fixed;
     background-size: cover;
 }
+.logo {
+    width: 50px;
+    height: 40px;
+    margin: 20px;
+    background-image: url('logoEA.png');
+    background-size: cover;
 
+}
 .center-text {
     text-align: center;
     margin-bottom: 20px;
@@ -19,8 +27,9 @@ body {
     z-index: 1;
 }
 h1 {
+text-align: center;
     color: #fff;
-    margin-bottom: 50px;
+    margin-bottom: 60px;
 }
 
 form {
@@ -31,9 +40,9 @@ form {
     width: 350px;
     text-align: center;
     position: relative;
-    z-index: 1; /* Cambiado el valor de z-index */
+    z-index: 1;
     margin-top: 20px;
-    height: 360px; /* Ajusta la altura según sea necesario */
+    height: 400px;
 }
 
 form::before {
@@ -43,7 +52,7 @@ form::before {
     top: 0;
     left: 0;
     width: 100%;
-    height: 30%;
+    height: 35%;
     background-color: #000;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
@@ -53,10 +62,10 @@ form::before {
 input[type="text"],
 input[type="password"],
 button {
-    width: 100%;
+    width: 95%;
     padding: 10px;
     border: 2px solid #ccc;
-    border-radius: 8px;
+    border-radius: 10px;
     margin-bottom: 10px;
     outline: none;
     font-size: 16px;
@@ -66,11 +75,12 @@ button {
 input[type="text"]:focus,
 input[type="password"]:focus,
 button:focus {
-    border-color: #000;
+    border-color: #444;
 }
 
 button {
-    background-color: #808080;
+
+    background-color: #757575;
     color: #fff;
     cursor: pointer;
     font-size: 16px;
@@ -78,7 +88,7 @@ button {
     border: none;
 }
 button:hover {
-            background-color: #000;
+            background-color: #444;
         }
 .registro-item {
     list-style-type: none;
@@ -92,4 +102,19 @@ button:hover {
 
 .registro-link:hover {
     text-decoration: underline;
+}
+.boton-volver {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    padding: 10px 15px;
+    background-color: #757575;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.boton-volver:hover {
+    background-color: #444;
 }
