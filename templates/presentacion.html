@@ -118,7 +118,6 @@
             Una vez completado el formulario, podrá visualizar el consumo estimado de energía para el dispositivo seleccionado.
         </div>
 
-
         <nav>
             <ul>
                 {% if user.is_authenticated %}
@@ -128,8 +127,8 @@
                     </li>
                 {% else %}
                     <li>
-                        <a href="/Registro" class="btn">Regístrate</a>
-                        <a href="/iniciarSesion" class="btn">Iniciar Sesión</a>
+                        <a href="http://127.0.0.1:8000/Registro" class="btn">Regístrate</a>
+                        <a href="http://127.0.0.1:8000/iniciarSesion" class="btn">Iniciar Sesión</a>
                     </li>
                 {% endif %}
             </ul>
