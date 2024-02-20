@@ -2,27 +2,18 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="{% static 'css/style3.css' %}">
-  <title>generarInforme</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados</title>
 </head>
 <body>
-  <div class="container">
-    <div class="factura">
-      <h1>Informe de consumo</h1>
-      <form action="/GenerarInforme" method="POST">
-           {{ form }}
-
-          <button>
-
-          </button>
-      </form>
-
-
-      <div class="detalle-factura">
-      </div>
-    </div>
-  </div>
+    <h1>Resultados del Dispositivo</h1>
+    <p>Nombre del Dispositivo: {{ dispositivo.nombre_dispositivo }}</p>
+    <p>Cantidad de Dispositivos: {{ dispositivo.cantidad_dispositivos }}</p>
+    <p>Cantidad de Vatios por Dispositivo: {{ dispositivo.cantidad_w }}</p>
+    <p>Horas de Uso Diarias por Dispositivo: {{ dispositivo.horas_uso }}</p>
+    <p>Consumo Total: {{ dispositivo.consumo_total }} vatios-hora</p>
+    <p>Fecha de Generación: {{ dispositivo.fecha_generacion }}</p>
+    <!-- Puedes agregar más detalles según sea necesario -->
 </body>
 </html>

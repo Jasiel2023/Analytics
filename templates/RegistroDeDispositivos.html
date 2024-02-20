@@ -1,46 +1,125 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="{% static 'css/style1.css' %}">
-  <title>Registro de dispositivos</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registra tu Dispositivo</title>
+    <style>
+  body {
+    background-image: url('fondoDispositivo.png');
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+
+}
+
+h1 {
+    color: white;
+    margin-top: -330px;
+    margin-bottom: 100px;
+    text-align: center;
+}
+
+#formularioDispositivos {
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+form {
+margin-top: 40px;
+    border-radius: 8px;
+    text-align: left;
+    display: inline-block;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+input {
+    border-radius: 8px;
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+input[type="button"] {
+    background-color: #757575;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    transition: background-color 0.3s;
+}
+
+input[type="button"]:hover {
+    background-color: #444;
+}
+    </style>
 </head>
 <body>
-  <div class="contenido">
-    <h1>Registra tus dispositivos</h1>
-    <button class="boton" onclick="toggleSelection(this)">Aire Acondicionado</button>
-    <button class="boton" onclick="toggleSelection(this)">Aspiradora</button>
-    <button class="boton" onclick="toggleSelection(this)">Cafetera</button>
-    <button class="boton" onclick="toggleSelection(this)">Calefaccion</button>
-    <button class="boton" onclick="toggleSelection(this)">Celular</button>
-    <button class="boton" onclick="toggleSelection(this)">Computadora</button>
-    <button class="boton" onclick="toggleSelection(this)">Consola</button>
-    <button class="boton" onclick="toggleSelection(this)">Ducha</button>
-    <button class="boton" onclick="toggleSelection(this)">Equipo de sonido</button>
-    <button class="boton" onclick="toggleSelection(this)">Foco</button>
-    <button class="boton" onclick="toggleSelection(this)">Impresora</button>
-    <button class="boton" onclick="toggleSelection(this)">Lampara</button>
-    <button class="boton" onclick="toggleSelection(this)">LapTop</button>
-    <button class="boton" onclick="toggleSelection(this)">Lavadora</button>
-    <button class="boton" onclick="toggleSelection(this)">Licuadora</button>
-    <button class="boton" onclick="toggleSelection(this)">Microondas</button>
-    <button class="boton" onclick="toggleSelection(this)">Plancha</button>
-    <button class="boton" onclick="toggleSelection(this)">Refrigeradora</button>
-    <button class="boton" onclick="toggleSelection(this)">Router</button>
-    <button class="boton" onclick="toggleSelection(this)">Secadora</button>
-    <button class="boton" onclick="toggleSelection(this)">Tablet</button>
-    <button class="boton" onclick="toggleSelection(this)">Television</button>
-    <button class="boton" onclick="toggleSelection(this)">Tostadora</button>
-    <button class="boton" onclick="toggleSelection(this)">Ventilador</button>
-    <button class="boton" onclick="toggleSelection(this)">Otros...</button>
-    <a href="http://127.0.0.1:8000/FormularioDeDispositivos" class="continuar-boton">Continuar</a>
-  </div>
-  <script>
-    function toggleSelection(button) {
-      button.classList.toggle("seleccionado");
-    }
-  </script>
+    <div id="registroDispositivos">
+        <h1>Registra tus Dispositivos</h1>
+
+        <!-- Formulario de Dispositivos -->
+        <div id="formularioDispositivos">
+            <form id="formDispositivos">
+                <label for="nombreDispositivo">Nombre del Dispositivo:</label>
+                <input type="text" name="nombreDispositivo" id="nombreDispositivo" required>
+
+                <label for="cantidadDispositivos">Cantidad de Dispositivos:</label>
+                <input type="number" name="cantidadDispositivos" id="cantidadDispositivos" required>
+
+                <label for="cantidadW">Cantidad de Vatios por Dispositivo:</label>
+                <input type="number" name="cantidadW" id="cantidadW" required>
+
+                <label for="horasUso">Horas de Uso Diarias por Dispositivo:</label>
+                <input type="number" name="horasUso" id="horasUso" required>
+
+                <input type="button" value="Registrar Dispositivo" onclick="registrarDispositivo()">
+            </form>
+        </div>
+
+    </div>
+
+    <script>
+        function registrarDispositivo() {
+            // Obtener los valores del formulario
+            var nombreDispositivo = document.getElementById('nombreDispositivo').value;
+            var cantidadDispositivos = parseInt(document.getElementById('cantidadDispositivos').value);
+            var cantidadW = parseInt(document.getElementById('cantidadW').value);
+            var horasUso = parseInt(document.getElementById('horasUso').value);
+
+            // Calcular la cantidad de energía
+            var energiaTotal = cantidadDispositivos * cantidadW * horasUso;
+
+            // Mostrar el resultado
+            var resultadoEnergia = document.getElementById('resultadoEnergia');
+            resultadoEnergia.innerHTML = '<p>Cantidad total de energía: ' + energiaTotal + ' vatios-hora</p>';
+
+            // También puedes agregar el dispositivo a la lista de dispositivos registrados si lo deseas
+            agregarDispositivoALista(nombreDispositivo, cantidadDispositivos, cantidadW, horasUso);
+        }
+
+        function agregarDispositivoALista(nombre, cantidad, vatios, horas) {
+            var listaDispositivosContenido = document.getElementById('listaDispositivosContenido');
+            var nuevoDispositivo = document.createElement('div');
+            nuevoDispositivo.innerHTML = '<p><strong>Nombre:</strong> ' + nombre + '<br><strong>Cantidad:</strong> ' + cantidad + '<br><strong>Vatios:</strong> ' + vatios + '<br><strong>Horas de Uso Diarias:</strong> ' + horas + '</p>';
+            listaDispositivosContenido.appendChild(nuevoDispositivo);
+        }
+    </script>
 </body>
 </html>

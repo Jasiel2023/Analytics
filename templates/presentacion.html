@@ -8,10 +8,59 @@
             margin: 0;
             padding: 0;
         }
+body.dark-mode {
+    background-color: #333 !important;
+    color: #fff !important;
+}
 
+.custom-switch {
+    position: fixed;
+    top: 30px;
+    left: 50px;
+    width: 60px;
+    height: 34px;
+}
+
+.custom-switch input {
+    margin right: 20px;
+}
+
+.slider {
+
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ddd;
+    transition: 0.4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
         .navbar {
-            background-color: #3498db;
-            padding: 10px 0;
+
+            background-color: #000;
+            padding: 30px 0;
             text-align: center;
         }
 
@@ -87,9 +136,22 @@
                 padding: 8px 16px;
             }
         }
+
     </style>
 
     <div class="navbar">
+         <label class="custom-switch">
+        <input type="checkbox" id="modoSwitch">
+        <span class="slider"></span>
+    </label>
+
+    <script>
+        const modoSwitch = document.getElementById('modoSwitch');
+
+        modoSwitch.addEventListener('change', () => {
+            document.body.classList.toggle('dark-mode', modoSwitch.checked);
+        });
+    </script>
         <a href="#" class="btn">Inicio</a>
         <a href="http://127.0.0.1:8000/RegistroDeDispositivos" class="btn">Inventario</a>
         <a href="http://127.0.0.1:8000/GenerarInforme" class="btn">Informe</a>
