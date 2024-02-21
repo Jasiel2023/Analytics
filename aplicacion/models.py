@@ -1,4 +1,3 @@
-from enum import Enum
 from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
@@ -37,40 +36,4 @@ class registroDispositivos(models.Model):
     cantidadDispositivos = models.IntegerField()
     def __str__(self):
         return self.consumoKwh
-
-class DispositivoEnum(Enum):
-    AIRE_ACONDICIONADO = 'Aire Acondicionado'
-    ASPIRADORA = 'Aspiradora'
-    REFRIGERADORA = 'Refrigeradora'
-    TELEVISOR = 'Televisor'
-    CAFETERA = 'Cafetera'
-    CELULAR = 'Celular'
-    CONSOLA = 'Consola'
-    EQUIPO_DE_SONIDO = 'Equipo De Sonido'
-    DUCHA_ELECTRICA = 'Ducha Electrica'
-    FOCO = 'Foco'
-    IMPRESORA = 'Impresora'
-    LAMPARA = 'Lampara'
-    LAPTOP = 'Laptop'
-    LAVADORA = 'Lavadora'
-    LICUADORA = 'Licuadora'
-    BATIDORA= 'Batidora'
-    MICROONDAS = 'Microondas'
-    TOSTADOR = 'Tostador'
-    PLANCHA = 'Plancha'
-    ROUTER = 'Router'
-    SECADORA = 'Secadora'
-    VENTILADOR = 'Ventilador'
-
-class RegistroDeDispositivos(models.Model):
-    dispositivo = models.CharField(
-        max_length=50,
-        choices=[(tag.name, tag.value) for tag in DispositivoEnum]
-    )
-
-    def __str__(self):
-        return self.dispositivo
-
-
-
 
