@@ -70,3 +70,28 @@ def iniciarSesion(request):
         else:
             login(request, user)
             return redirect('presentacion')
+
+###
+
+
+###
+
+from django.shortcuts import render
+from . forms import DispositivoForm
+
+def formulario(request):
+    if request.method == 'POST':
+        form = DispositivoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            # hacer algo después de guardar los datos del usuario
+    else:
+        form = DispositivoForm()
+    return render(request, 'formulario.html', {'form': form})
+
+from django.shortcuts import render
+from .models import Dispositivo
+
+def GenerarInforme(request):
+    dispositivos = Dispositivo.objects.all()
+    return render(request, 'GenerarInforme.html', {'dispositivos': dispositivos})

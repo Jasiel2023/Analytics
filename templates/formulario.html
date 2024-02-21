@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar</title>
+</head>
+<body>
+    {% if form.errors %}
+        <div class="alert alert-danger" role="alert">
+            {% for field, errors in form.errors.items %}
+                <strong>{{ field|title }}:</strong>
+                {% for error in errors %}
+                    {{ error }}
+                {% endfor %}
+                <br>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+
+    <div id="registroDispositivos">
+        <h1>Registra tus Dispositivos</h1>
+
+        <form action="{% url 'formulario' %}" method="POST">
+            {% csrf_token %}
+            {% if mensaje %}
+                <div class="alert alert-success" role="alert">
+                    Dispositivo registrado exitosamente!
+                </div>
+            {% endif %}
+
+            <!-- Formulario de Dispositivos -->
+            <div id="formularioDispositivos">
+
+                <label for="nombre_dispositivo">Nombre del Dispositivo:</label>
+                <input type="text" name="nombre_dispositivo" id="nombreDispositivo" required>
+
+                <label for="cantidad_dispositivo">Cantidad de Dispositivos:</label>
+                <input type="number" name="cantidad_dispositivo" id="cantidadDispositivos" required>
+
+                <label for="consumo_hora">Horas de Uso Diarias por Dispositivo:</label>
+                <input type="number" name="consumo_hora" id="horasUso" required>
+
+                <label for="cantidad_consumo">Potencia por Dispositivo (KW):</label>
+                <input type="number" name="cantidad_consumo" id="cantidadW" step="0.01" required>
+
+                <!-- Botón para calcular energía
+                <input type="button" value="Calcular Energía" onclick="registrarDispositivo()">
+                -->
+                <!-- Campo adicional para mostrar el total de energía
+                <label for="total_energia">Total de Energía (KW-h):</label>
+                <input type="text" name="total_energia" id="total_energia" readonly>
+                -->
+                <!-- Botones para guardar y limpiar
+                <input type="button" value="Limpiar Campos" onclick="limpiarCampos()">-->
+                <button type="submit" class="btn">Guardar en la base de datos</button>
+
+            </div>
+        </form>
+    </div>
+<a href="http://127.0.0.1:8000/presentacion" class="boton-volver">Volver</a>
+</body>
+</html>
