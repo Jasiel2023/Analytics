@@ -76,8 +76,14 @@ input:checked + .slider:before {
             margin: 50px;
         }
 
-        h1 {
-            color: #3498db;
+                h1 {
+            background: linear-gradient(to right, rgba(255, 255, 255, 0), #4285F4, #FFA500, rgba(255, 255, 255, 0));
+            -webkit-background-clip: text;
+            color: transparent;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 0; /* Elimina el margen predeterminado del h1 */
+            padding: 20px; /* Añade espacio alrededor del texto */
         }
 
         .paragraph {
@@ -162,6 +168,35 @@ input:checked + .slider:before {
 .btn_CS:hover {
     background-color: #444;
 }
+
+  .consulta-box {
+    display: flex;
+    align-items: center;
+    max-width: 400px;
+    margin: 20px auto;
+    position: relative;
+  }
+
+  #userInput {
+    flex: 1;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #4285F4;
+    border-radius: 20px;
+    outline: none;
+  }
+
+  .lupa-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+
+  #enviarButton {
+    display: none; /* Oculta el botón de enviar */
+  }
     </style>
 
     <div class="navbar">
@@ -177,13 +212,20 @@ input:checked + .slider:before {
             document.body.classList.toggle('dark-mode', modoSwitch.checked);
         });
     </script>
-        <a href="#" class="btn">Inicio</a>
         <a href="http://127.0.0.1:8000/formulario" class="btn">Registro</a>
         <a href="http://127.0.0.1:8000/GenerarInforme" class="btn">Informe</a>
         <a href="http://127.0.0.1:8000/FormularioDeDispositivos" class="btn">Diagramas</a>
     </div>
            <div class="welcome-container">
-        <h1>Sistema de consumo energético</h1>
+        <h1>ElectricAnalytics</h1>
+<div class="consulta-box">
+  <label for="userInput" style="display: none;">Tu consulta:</label>
+  <input type="text" id="userInput" placeholder="Tu consulta...">
+  <span class="lupa-icon" onclick="enviarConsulta()">&#128269;</span>
+  <!-- Botón de enviar (oculto) -->
+  <button id="enviarButton">Enviar</button>
+</div>
+    <div id="respuesta"></div>
 <script>
     // Función para verificar el consumo de cada dispositivo y mostrar notificaciones si es excesivo
     function verificarConsumoDispositivos() {
@@ -211,6 +253,7 @@ input:checked + .slider:before {
     // Llama a la función al cargar la página (puedes ajustar esto según tus necesidades)
     window.onload = verificarConsumoDispositivos;
 </script>
+
         <nav>
             <ul>
                 {% if user.is_authenticated %}

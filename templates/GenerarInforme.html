@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Informes</title>
     <link rel="stylesheet" href="{% static 'styles.css' %}">  <!-- Asegúrate de ajustar la ruta al archivo CSS correctamente -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCD97GWCOY6Lqg_YxlpETbMtBLTwKUDVjU&libraries=places"></script>
 </head>
 <style>
     body {
@@ -94,7 +95,30 @@
         {% else %}
             <p>No hay dispositivos registrados.</p>
         {% endif %}
+         {% if ubicacion %}
+            <div id="mapa" style="height: 400px;"></div>
+        {% endif %}
         <a href="http://127.0.0.1:8000/presentacion" class="boton-volver">Volver</a>
+            <script>
+        function inicializarMapa() {
+            var ubicacion = {lat: -34.397, lng: 150.644};  // Cambia estos valores con la ubicación real
+
+            var mapa = new google.maps.Map(document.getElementById('mapa'), {
+                center: ubicacion,
+                zoom: 15  // Ajusta el nivel de zoom según tus necesidades
+            });
+
+            // Marcador en la ubicación
+            var marcador = new google.maps.Marker({
+                position: ubicacion,
+                map: mapa,
+                title: 'Ubicación del Dispositivo'
+            });
+        }
+
+        // Llama a la función de inicialización cuando la página haya cargado
+        google.maps.event.addDomListener(window, 'load', inicializarMapa);
+    </script>
     </div>
 </body>
 </html>
