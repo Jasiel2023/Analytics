@@ -83,15 +83,11 @@ class Dispositivo(models.Model):
     cantidad_dispositivo = models.FloatField()
     cantidad_consumo = models.FloatField()
     consumo_hora = models.FloatField()
+    total_energia = models.FloatField(default=0.0)
+    fecha_registro = models.DateTimeField(auto_now=True)
 
-    # Campos de fechas
-#    fecha_nacimiento = models.DateField()
-#    ultimo_login = models.DateTimeField(auto_now=True)
-
-    # Campos booleanos
-#    esta_activa = models.BooleanField(default=True)
-#    es_personal = models.BooleanField(default=False)
-
+    def __str__(self):
+        return self.nombre_dispositivo
     # Campos con opciones
 #    OPCIONES_ROL = [
 #        ('usuario', 'Usuario normal'),

@@ -13,9 +13,4 @@ from . models import Dispositivo
 class DispositivoForm(forms.ModelForm):
     class Meta:
         model = Dispositivo
-        fields = [
-            'nombre_dispositivo',
-            'cantidad_dispositivo',
-            'consumo_hora',
-            'cantidad_consumo',
-        ]
+        fields = '__all__'
