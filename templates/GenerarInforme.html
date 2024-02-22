@@ -2,18 +2,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Agrega cualquier meta o enlaces adicionales aquí -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informes</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">  <!-- Asegúrate de ajustar la ruta al archivo CSS correctamente -->
 </head>
+<style>
+    body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    border-top: 100px solid black;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    color: white;
+    margin-top: -12vh; /* 50% del alto de la ventana */
+    margin-bottom: 50px;
+    text-align: center;
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.dispositivos-list {
+    list-style: none;
+    padding: 0;
+}
+
+.dispositivo-item {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+      .boton-volver {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    padding: 10px 15px;
+    background-color: #757575;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.boton-volver:hover {
+    background-color: #444;
+}
+</style>
 <body>
-    <h1>Generar Informe</h1>
-    {% if dispositivos %}
-        <ul>
-            {% for dispositivo in dispositivos %}
-                <li>{{ dispositivo.nombre_dispositivo }} - {{ dispositivo.cantidad_dispositivos }} - {{ dispositivo.consumo_hora }} - {{ dispositivo.cantidad_consumo }}</li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>No hay dispositivos registrados.</p>
-    {% endif %}
+    <div class="container">
+        <h1>Generar Informe</h1>
+        {% if dispositivos %}
+            <ul class="dispositivos-list">
+                {% for dispositivo in dispositivos %}
+                    <li class="dispositivo-item">
+                        <span class="nombre">{{ dispositivo.nombre_dispositivo }}</span>
+                        <span class="cantidad">{{ dispositivo.cantidad_dispositivo }}</span>
+                        <span class="consumo">{{ dispositivo.consumo_hora }}</span>
+                        <span class="cantidad">{{ dispositivo.cantidad_consumo }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No hay dispositivos registrados.</p>
+        {% endif %}
+        <a href="http://127.0.0.1:8000/presentacion" class="boton-volver">Volver</a>
+    </div>
 </body>
 </html>
