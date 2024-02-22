@@ -95,3 +95,20 @@ from .models import Dispositivo
 def GenerarInforme(request):
     dispositivos = Dispositivo.objects.all()
     return render(request, 'GenerarInforme.html', {'dispositivos': dispositivos})
+
+from django.shortcuts import render
+import matplotlib.pyplot as plt
+from io import BytesIO
+import base64
+
+from django.shortcuts import render
+from aplicacion.models import Dispositivo
+
+def presentacion(request):
+    # Obtén la información de los dispositivos desde tu modelo
+    dispositivos = Dispositivo.objects.all()
+
+    # Pasa la información al contexto
+    context = {'dispositivos': dispositivos}
+
+    return render(request, 'presentacion.html', context)

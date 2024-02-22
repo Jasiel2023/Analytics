@@ -136,7 +136,32 @@ input:checked + .slider:before {
                 padding: 8px 16px;
             }
         }
+    .notificacion {
+        border: 2px solid orange;
+        background-color: #FFDDBB;
+        color: #333;
+        padding: 10px;
+        margin: 20px auto;
+        border-radius: 5px;
+        font-weight: bold;
+        width: 80%;
+        text-align: center;
+    }
+.btn_CS{
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    background-color: #757575;
+    color: #fff;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
 
+.btn_CS:hover {
+    background-color: #444;
+}
     </style>
 
     <div class="navbar">
@@ -155,36 +180,42 @@ input:checked + .slider:before {
         <a href="#" class="btn">Inicio</a>
         <a href="http://127.0.0.1:8000/formulario" class="btn">Registro</a>
         <a href="http://127.0.0.1:8000/GenerarInforme" class="btn">Informe</a>
-        <a href="#" class="btn">Diagramas</a>
+        <a href="http://127.0.0.1:8000/FormularioDeDispositivos" class="btn">Diagramas</a>
     </div>
            <div class="welcome-container">
         <h1>Sistema de consumo energético</h1>
+<script>
+    // Función para verificar el consumo de cada dispositivo y mostrar notificaciones si es excesivo
+    function verificarConsumoDispositivos() {
+        {% for dispositivo in dispositivos %}
+            var totalEnergia = {{ dispositivo.total_energia }};  // Obtén el total de energía del dispositivo
+            var nombre = "{{ dispositivo.nombre_dispositivo }}";  // Obtén el nombre del dispositivo
 
-        <div class="paragraph">
-            Este programa te permitirá calcular el consumo eléctrico de tus dispositivos para verificar y ahorrar la mayor energía posible, contribuyendo de manera efectiva al consumo energético eficiente.
-        </div>
+            // Verifica si el consumo es excesivo (puedes ajustar el umbral según tus necesidades)
+            if (totalEnergia > 1000) {
+                // Agrega un elemento HTML para mostrar la información del dispositivo
+                var dispositivoInfo = document.createElement('div');
+                dispositivoInfo.className = 'notificacion';
+                dispositivoInfo.innerHTML = `Este dispositivo: ${nombre}, esta
+                consumiendo: ${totalEnergia} KW lo cual es un exceso de energía. `;
 
-        <div class="paragraph instruction">
-            Para ello, el programa te permitirá elegir entre diversos dispositivos comunes en los hogares.
-        </div>
+                // Agrega el elemento al cuerpo del documento
+                document.body.appendChild(dispositivoInfo);
+            }
+        {% endfor %}
 
-        <div class="paragraph instruction">
-            Después debe seleccionar el dispositivo electrónico del cual deseé tener información.
-        </div>
+        // Agrega el elemento al cuerpo del documento
+        document.body.appendChild(piePagina);
+    }
 
-        <div class="paragraph instruction">
-            Deberá ingresar las horas que deseas utilizarlo y la cantidad de energía que consume.
-        </div>
-
-        <div class="paragraph instruction">
-            Una vez completado el formulario, podrá visualizar el consumo estimado de energía para el dispositivo seleccionado.
-        </div>
-
+    // Llama a la función al cargar la página (puedes ajustar esto según tus necesidades)
+    window.onload = verificarConsumoDispositivos;
+</script>
         <nav>
             <ul>
                 {% if user.is_authenticated %}
                     <li>
-                        <a href="/cerrarSesion" class="btn">Cerrar Sesión</a>
+                        <a href="/cerrarSesion" class="btn_CS">Cerrar Sesión</a>
 
                     </li>
                 {% else %}
