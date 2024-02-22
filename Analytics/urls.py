@@ -23,20 +23,12 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
     path('iniciarSesion/',  views.iniciarSesion, name= 'iniciarSesion'),
-<<<<<<< Updated upstream
-    path('', views.index, name='index'),  # Cambiado de 'index/' a ''
-=======
->>>>>>> Stashed changes
     path('presentacion/', views.presentacion, name='presentacion'),
     path('FormularioDeDispositivos/', views.FormularioDeDispositivos, name='Dispositivos'),
     path('GenerarInforme/', views.GenerarInforme, name='GenerarInforme'),
     path('RegistroDeDispositivos/', views.RegistroDeDispositivos, name='RegistroDeDispositivos'),
     path('registro/', views.registro, name='registro'),
     path('cerrarSesion/', views.cerrarSesion, name='cerrarSesion'),
-<<<<<<< Updated upstream
     path('Inicio/', views.inicio, name='inicio')
 ]
-=======
-    path('Inicio/', views.inicio, name='inicio'),
-]
->>>>>>> Stashed changes
+
