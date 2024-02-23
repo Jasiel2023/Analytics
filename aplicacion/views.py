@@ -1,13 +1,7 @@
-from django.shortcuts import render, redirect
-import Analytics
-#from aplicacion.models import DISPOSITIVOS
-from aplicacion.models import Usuario
+
 from aplicacion.models import registroDispositivos
-from aplicacion.models import Informe
 from .forms import InformeForm
 
-from django.forms import ModelForm
-from aplicacion.models import Usuario, MedidorDeConsumo, Informe,Registro
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
@@ -32,11 +26,6 @@ def registro(request):
         return render(request, 'registro.html', {'form': UserCreationForm,
                                                  "error": 'Contraseña no coincide'})
 
-
-def RegistroDeDispositivos(request):
-    #dispositivos = DISPOSITIVOS.objects.all()
-    return render(request, 'RegistroDeDispositivos.html')
-
 def FormularioDeDispositivos(request):
     registro = registroDispositivos.objects.all()
     return render(request, 'FormularioDeDispositivos.html', {'registro': registro})
@@ -44,7 +33,6 @@ def FormularioDeDispositivos(request):
 def GenerarInforme(request):
     return render(request, 'GenerarInforme.html', {
         'form' : InformeForm })
-
 
 def inicio(request):#ojo a esto
     return render(request, 'inicio.html')
@@ -73,10 +61,6 @@ def iniciarSesion(request):
 
 ###
 
-
-###
-
-from django.shortcuts import render
 from . forms import DispositivoForm
 
 def formulario(request):
@@ -84,31 +68,49 @@ def formulario(request):
         form = DispositivoForm(request.POST)
         if form.is_valid():
             form.save()
-            # hacer algo después de guardar los datos del usuario
+
     else:
         form = DispositivoForm()
     return render(request, 'formulario.html', {'form': form})
-
-from django.shortcuts import render
-from .models import Dispositivo
 
 def GenerarInforme(request):
     dispositivos = Dispositivo.objects.all()
     return render(request, 'GenerarInforme.html', {'dispositivos': dispositivos})
 
-from django.shortcuts import render
-import matplotlib.pyplot as plt
-from io import BytesIO
-import base64
-
-from django.shortcuts import render
 from aplicacion.models import Dispositivo
 
 def presentacion(request):
-    # Obtén la información de los dispositivos desde tu modelo
+
     dispositivos = Dispositivo.objects.all()
 
-    # Pasa la información al contexto
     context = {'dispositivos': dispositivos}
 
     return render(request, 'presentacion.html', context)
+
+
+from django.shortcuts import render, redirect
+from .forms import UsuarioForm
+from django.contrib.auth.decorators import login_required
+from .models import Usuario
+
+@login_required
+def perfil(request):
+    usuario_actual = request.user
+    perfil_usuario, creado = Usuario.objects.get_or_create(user=usuario_actual)
+
+    if request.method == 'POST':
+        form = UsuarioForm(request.POST)
+
+        if form.is_valid():
+            perfil_usuario.cedula = form.cleaned_data['cedula']
+            perfil_usuario.gmail = form.cleaned_data['gmail']
+            perfil_usuario.api_google_maps = form.cleaned_data['api_google_maps']
+            perfil_usuario.save()
+
+            return redirect('perfil.html')
+
+    else:
+
+        form = UsuarioForm()
+
+    return render(request, 'perfil.html', {'usuario_actual': usuario_actual, 'perfil_usuario': perfil_usuario, 'form': form})

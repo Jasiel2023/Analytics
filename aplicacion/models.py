@@ -2,19 +2,24 @@ from enum import Enum
 from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
-class Usuario(models.Model):
-    nombre = models.CharField(max_length=50)
-    apellido = models.CharField(max_length=50)
-    direccion = models.CharField(max_length=90)
-    cedula = models.CharField(max_length=50)
-    def __str__(self):
-        return self.nombre
+from django.db import models
+from django.contrib.auth.models import User
 
 class Registro(models.Model):
     registro = models.CharField(max_length=80)
     def __str__(self):
         return self.registro
 
+class Usuario(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, default=1)
+    cedula = models.CharField(max_length=20, blank=True)
+    gmail = models.EmailField(blank=True)
+    api_google_maps = models.CharField(max_length=100, blank=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, default=1)
+    nuevo_campo = models.CharField(max_length=255, default='valor_predeterminado')
+
+    def __str__(self):
+        return self.user.username
 class MedidorDeConsumo(models.Model):
     consumoTotal = models.FloatField()
     registro = models.ForeignKey(Registro, on_delete=models.CASCADE, related_name="medidorDeConsumo")
@@ -25,9 +30,7 @@ class Informe(models.Model):
     fechaAnalisis = models.DateField()
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    #resultadosAlmacenados = models.CharField(max_length=500)
-   # usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name="informe_list")
-   # medidorDeConsumo = models.ForeignKey(MedidorDeConsumo, on_delete=models.CASCADE, related_name="medidorDeConsumo")
+
     def __str__(self):
         return self.user.username
 
@@ -38,35 +41,6 @@ class registroDispositivos(models.Model):
     def __str__(self):
         return self.consumoKwh
 
-#class Dispositivos(Enum):
- #   AIRE_ACONDICIONADO = models.BooleanField(False)
-    #  ASPIRADORA = models.BooleanField(False)
-    #   REFRIGERADORA = models.BooleanField(False)
-    #TELEVISOR = models.BooleanField(False)
-    #CAFETERA = models.BooleanField(False)
-    #CELULAR = models.BooleanField(False)
-    #CONSOLA = models.BooleanField(False)
-    #EQUIPO_DE_SONIDO = models.BooleanField(False)
-    #DUCHA_ELECTRICA = models.BooleanField(False)
-    #FOCO = models.BooleanField(False)
-    #IMPRESORA = models.BooleanField(False)
-    #LAMPARA = models.BooleanField(False)
-    #LAPTOP = models.BooleanField(False)
-    #LAVADORA = models.BooleanField(False)
-    #LICUADORA = models.BooleanField(False)
-    #MICROONDAS = models.BooleanField(False)
-    # PLANCHA = models.BooleanField(False)
-    #ROUTER = models.BooleanField(False)
-    #SECADORA = models.BooleanField(False)
-    #TOSTADOR = models.BooleanField(False)
-    #VENTILADOR = models.BooleanField(False)
-
-#class RegistroDeDispositivos(models.Model):
-    #   dispositivo = models.CharField(max_length=20, choices=[(tag.name, tag.value) for tag in Dispositivos])
-
-#   def __str__(self):
-#       return self.dispositivo
-
 ###
 
 from django.db import models
@@ -74,12 +48,6 @@ from django.db import models
 class Dispositivo(models.Model):
     # Campos de texto
     nombre_dispositivo = models.CharField(max_length=255)
-#    nombre = models.CharField(max_length=50)
-#    apellidos = models.CharField(max_length=50)
-#    email = models.EmailField(unique=True)
-
-    # Campos numéricos
-
     cantidad_dispositivo = models.FloatField()
     cantidad_consumo = models.FloatField()
     consumo_hora = models.FloatField()
@@ -88,10 +56,5 @@ class Dispositivo(models.Model):
 
     def __str__(self):
         return self.nombre_dispositivo
-    # Campos con opciones
-#    OPCIONES_ROL = [
-#        ('usuario', 'Usuario normal'),
-#        ('admin', 'Administrador'),
-#    ]
-#    roles = models.CharField(max_length=7, choices=OPCIONES_ROL, default='usuario')
+
 
