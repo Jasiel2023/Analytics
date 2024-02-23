@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 
 class Registro(models.Model):
     registro = models.CharField(max_length=80)
+
     def __str__(self):
         return self.registro
 
@@ -38,12 +39,12 @@ class registroDispositivos(models.Model):
     consumoKwh = models.FloatField()
     tiempoDeUso = models.DateField()
     cantidadDispositivos = models.IntegerField()
+    dispositivoList = models.ForeignKey(Dispositivo, on_delete=models.CASCADE, related_name="registroDispositivos")
+    registroList = models.ForeignKey(Registro, on_delete=models.CASCADE, related_name="registroDispositivos")
     def __str__(self):
         return self.consumoKwh
 
-###
 
-from django.db import models
 
 class Dispositivo(models.Model):
     # Campos de texto
