@@ -1,15 +1,146 @@
 {% load static %}
-<!-- pie_chart.html -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pie Chart</title>
+    <title>Gráfico de Pie con Dispositivos</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    }
+}
+.header {
+    background-color: black;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+h1 {
+    margin: 0;
+}
+
+/* Estilo adicional para el lienzo del gráfico */
+#miGraficoDePie {
+    max-width: 100%;  /* Ajusta el ancho máximo según sea necesario */
+    margin: 0 auto;   /* Centra el lienzo horizontalmente */
+    display: block;   /* Elimina el espacio adicional debajo del lienzo */
+}
+canvas {
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+}
+
+div {
+    text-align: center;
+    margin-top: 20px;
+}
+
+h3 {
+    color: #333;
+}
+
+p {
+    font-size: 18px;
+    color: #555;
+}
+
+/* Estilos adicionales para mejorar la visualización del gráfico de pie */
+#miGraficoDePie {
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para el mensaje de dispositivo que más consume */
+#dispositivoMasConsumo {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    display: inline-block;
+}
+          .boton-volver {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            padding: 10px 15px;
+            background-color: #757575;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .boton-volver:hover {
+            background-color: #444;
+        }
+
+</style>
 <body>
-    <h1>Consumo KW por Dispositivo</h1>
-    <img src="data:image/png;base64,{{ image_base64 }}" alt="Pie Chart">
+   <div class="header">
+        <h1>Estadísticas</h1>
+    </div>
+    <!-- Lienzo para el gráfico de pie -->
+    <canvas id="miGraficoDePie" width="400" height="400"></canvas>
+
+    <!-- Mostrar el dispositivo que más consume -->
+    <div>
+        <h3>Dispositivo que más consume:</h3>
+        <p id="dispositivoMasConsumo">
+            {% if dispositivo_mas_consumo %}
+                {{ dispositivo_mas_consumo.nombre_dispositivo }} - {{ dispositivo_mas_consumo.total_energia }}
+            {% else %}
+                No hay dispositivos registrados.
+            {% endif %}
+        </p>
+    </div>
+
+    <script>
+    var ctx = document.getElementById('miGraficoDePie').getContext('2d');
+var miGraficoDePie = new Chart(ctx, {
+    type: 'pie',
+    data: {
+        labels: [{% for dispositivo in dispositivos_json %}"{{ dispositivo.nombre_dispositivo }}",{% endfor %}],
+        datasets: [{
+            data: [{% for dispositivo in dispositivos_json %}{{ dispositivo.total_energia }},{% endfor %}],
+            backgroundColor: obtenerColoresAleatorios({{ dispositivos_json|length }}),
+        }],
+    },
+});
+        // Función para obtener colores aleatorios
+        function obtenerColoresAleatorios(cantidad) {
+            var colores = [];
+            for (var i = 0; i < cantidad; i++) {
+                colores.push(obtenerColorAleatorio());
+            }
+            return colores;
+        }
+
+        // Función para obtener un color aleatorio
+        function obtenerColorAleatorio() {
+            var letras = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letras[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        // Mostrar el dispositivo que más consume
+        mostrarDispositivoMasConsumo();
+
+        function mostrarDispositivoMasConsumo() {
+            if (dispositivo_mas_consumo !== null) {
+                document.getElementById('dispositivoMasConsumo').innerText =
+                    dispositivo_mas_consumo.nombre_dispositivo + ' - ' + dispositivo_mas_consumo.total_energia;
+            }
+        }
+    </script>
+     <a href="http://127.0.0.1:8000/presentacion" class="boton-volver">Volver</a>
 </body>
 </html>

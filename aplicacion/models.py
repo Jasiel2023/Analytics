@@ -11,13 +11,14 @@ class Registro(models.Model):
     def __str__(self):
         return self.registro
 
+from django.contrib.auth.models import User
+from django.db import models
+
 class Usuario(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, default=1)
-    cedula = models.CharField(max_length=20, blank=True)
-    gmail = models.EmailField(blank=True)
-    api_google_maps = models.CharField(max_length=100, blank=True)
-    user = models.OneToOneField(User, on_delete=models.CASCADE, default=1)
-    nuevo_campo = models.CharField(max_length=255, default='valor_predeterminado')
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    cedula = models.CharField(max_length=10, blank=True, null=True)
+    gmail = models.EmailField(blank=True, null=True)
+    direccion = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
         return self.user.username
