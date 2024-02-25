@@ -39,8 +39,7 @@ class registroDispositivos(models.Model):
     consumoKwh = models.FloatField()
     tiempoDeUso = models.DateField()
     cantidadDispositivos = models.IntegerField()
-    dispositivoList = models.ForeignKey(Dispositivo, on_delete=models.CASCADE, related_name="registroDispositivos")
-    registroList = models.ForeignKey(Registro, on_delete=models.CASCADE, related_name="registroDispositivos")
+
     def __str__(self):
         return self.consumoKwh
 

@@ -73,10 +73,20 @@ def formulario(request):
         form = DispositivoForm()
     return render(request, 'formulario.html', {'form': form})
 
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Dispositivo
+
+
 def GenerarInforme(request):
     dispositivos = Dispositivo.objects.all()
-    return render(request, 'GenerarInforme.html', {'dispositivos': dispositivos})
 
+    if request.method == 'POST':
+        dispositivo_id = request.POST.get('dispositivo_id')
+        dispositivo = get_object_or_404(Dispositivo, pk=dispositivo_id)
+        dispositivo.delete()
+        return redirect('GenerarInforme')
+
+    return render(request, 'GenerarInforme.html', {'dispositivos': dispositivos})
 from aplicacion.models import Dispositivo
 
 def presentacion(request):

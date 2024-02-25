@@ -20,3 +20,5 @@ class UsuarioForm(forms.ModelForm):
     class Meta:
         model = Usuario
         fields = '__all__'
+from django import forms
+
