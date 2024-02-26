@@ -7,7 +7,83 @@
     <link rel="stylesheet" href="{% static 'styleE.css' %}">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+<style>
+       body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    margin: 0;
+    padding: 0;
+    border-top: 100px solid black;
+    }
+}
+.header {
+    background-color: black;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
 
+h1 {
+    color: white;
+    margin-top: -80px;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+#miGraficoDePie {
+    max-width: 100%;
+    margin: 0 auto;
+    display: block;
+}
+canvas {
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+}
+
+div {
+    text-align: center;
+    margin-top: 20px;
+}
+
+h3 {
+    color: #333;
+}
+
+p {
+    font-size: 18px;
+    color: #555;
+}
+
+#miGraficoDePie {
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#dispositivoMasConsumo {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    display: inline-block;
+}
+          .boton-volver {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            padding: 10px 15px;
+            background-color: #757575;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .boton-volver:hover {
+            background-color: #444;
+        }
+</style>
 <body>
    <div class="header">
         <h1>Estadísticas</h1>
@@ -26,46 +102,58 @@
             {% endif %}
         </p>
     </div>
+<script>
+  var ctx = document.getElementById('miGraficoDePie').getContext('2d');
+var nombresDispositivos = [];
+var energiasDispositivos = [];
+var coloresDispositivos = [];
 
-    <script>
-    var ctx = document.getElementById('miGraficoDePie').getContext('2d');
+{% for dispositivo in dispositivos_json %}
+    nombresDispositivos.push("{{ dispositivo.nombre_dispositivo }}");
+    energiasDispositivos.push({{ dispositivo.total_energia }});
+    coloresDispositivos.push(obtenerColorAleatorio());
+{% endfor %}
+
 var miGraficoDePie = new Chart(ctx, {
     type: 'pie',
     data: {
-        labels: [{% for dispositivo in dispositivos_json %}"{{ dispositivo.nombre_dispositivo }}",{% endfor %}],
+        labels: nombresDispositivos,
         datasets: [{
-            data: [{% for dispositivo in dispositivos_json %}{{ dispositivo.total_energia }},{% endfor %}],
-            backgroundColor: obtenerColoresAleatorios({{ dispositivos_json|length }}),
+            data: energiasDispositivos,
+            backgroundColor: coloresDispositivos,
         }],
     },
 });
 
-        function obtenerColoresAleatorios(cantidad) {
-            var colores = [];
-            for (var i = 0; i < cantidad; i++) {
-                colores.push(obtenerColorAleatorio());
-            }
-            return colores;
-        }
+// Función para obtener colores aleatorios
+function obtenerColoresAleatorios(cantidad) {
+    var colores = [];
+    for (var i = 0; i < cantidad; i++) {
+        colores.push(obtenerColorAleatorio());
+    }
+    return colores;
+}
 
-        function obtenerColorAleatorio() {
-            var letras = '0123456789ABCDEF';
-            var color = '#';
-            for (var i = 0; i < 6; i++) {
-                color += letras[Math.floor(Math.random() * 16)];
-            }
-            return color;
-        }
+// Función para obtener un color aleatorio
+function obtenerColorAleatorio() {
+    var letras = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letras[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
 
-        mostrarDispositivoMasConsumo();
+// Mostrar el dispositivo que más consume
+mostrarDispositivoMasConsumo();
 
-        function mostrarDispositivoMasConsumo() {
-            if (dispositivo_mas_consumo !== null) {
-                document.getElementById('dispositivoMasConsumo').innerText =
-                    dispositivo_mas_consumo.nombre_dispositivo + ' - ' + dispositivo_mas_consumo.total_energia;
-            }
-        }
-    </script>
+function mostrarDispositivoMasConsumo() {
+    if (dispositivo_mas_consumo !== null) {
+        document.getElementById('dispositivoMasConsumo').innerText =
+            dispositivo_mas_consumo.nombre_dispositivo + ' - ' + dispositivo_mas_consumo.total_energia;
+    }
+}
+   </script>
      <a href="http://127.0.0.1:8000/presentacion" class="boton-volver">Volver</a>
 </body>
 </html>
