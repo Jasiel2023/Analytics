@@ -31,10 +31,7 @@ path('Estadisticas/', views.Estadisticas, name='Estadisticas'),
     path('registro/', views.registro, name='registro'),
     path('cerrarSesion/', views.cerrarSesion, name='cerrarSesion'),
     path('Inicio/', views.inicio, name='inicio')
-<<<<<<< HEAD
 ]
 
-=======
 
-]
->>>>>>> feature
+

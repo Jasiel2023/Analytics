@@ -43,8 +43,6 @@ class registroDispositivos(models.Model):
     def __str__(self):
         return self.consumoKwh
 
-<<<<<<< HEAD
-=======
 
 
 class Dispositivo(models.Model):
@@ -60,4 +58,3 @@ class Dispositivo(models.Model):
         return self.nombre_dispositivo
 
 
->>>>>>> feature
