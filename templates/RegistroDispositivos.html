@@ -1,0 +1,92 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <link rel="stylesheet" href="{% static 'css/styleRD.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registra tus dispositivos</title>
+</head>
+<body>
+{% if form.errors %}
+                <div class="alert alert-danger" role="alert">
+  A simple danger alert—check it out!
+</div>
+                {% endif %}
+    <div id="registroDispositivos">
+        <h1>Registra tus Dispositivos</h1>
+
+        <form action="{% url 'RegistroDispositivos' %}" method="POST">
+            {% csrf_token %}
+            {% if mensaje %}
+                <div class="alert alert-success" role="alert">
+                    Dispositivo registrado exitosamente!
+                </div>
+            {% endif %}
+
+            <!-- Formulario de Dispositivos -->
+            <div id="formularioDispositivos">
+
+                <label for="nombre_dispositivo">Nombre del Dispositivo:</label>
+                <input type="text" name="nombre_dispositivo" id="nombreDispositivo" required>
+
+                <label for="cantidad_dispositivo">Cantidad de Dispositivos:</label>
+                <input type="number" name="cantidad_dispositivo" id="cantidadDispositivos" required>
+
+                <label for="consumo_hora">Horas de Uso Diarias por Dispositivo:</label>
+                <input type="number" name="consumo_hora" id="horasUso" required>
+
+                <label for="cantidad_consumo">Potencia por Dispositivo (KW):</label>
+                <input type="number" name="cantidad_consumo" id="cantidadW" step="0.01" required>
+
+
+                <input type="button" value="Calcular Energía" onclick="registrarDispositivo()">
+
+
+                <label for="total_energia">Total de Energía (KW-h):</label>
+                <input type="number" name="total_energia" id="total_energia" readonly>
+ <button type="button" class="btn" onclick="limpiarCampos()">Limpiar Campos</button>
+                <button type="submit" class="btn">Guardar registro</button>
+
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function registrarDispositivo() {
+            // Obtener los valores del formulario
+            var cantidadDispositivos = parseInt(document.getElementById('cantidadDispositivos').value);
+            var cantidadW = parseFloat(document.getElementById('cantidadW').value);
+            var horasUso = parseFloat(document.getElementById('horasUso').value);
+
+            // Verificar si todos los campos están llenos y son válidos
+            if (isNaN(cantidadDispositivos) || isNaN(cantidadW) || isNaN(horasUso) ||
+                cantidadDispositivos <= 0 || cantidadW <= 0 || horasUso <= 0) {
+                alert('Por favor, complete todos los campos con valores válidos mayores a cero.');
+                return;
+            }
+
+            // Calcular el total de energía
+            var total_energia = cantidadDispositivos * cantidadW * horasUso;
+
+            // Mostrar el total de energía en el campo correspondiente
+            document.getElementById('total_energia').value = total_energia.toFixed(2);
+        }
+ function guardarYLimpiar() {
+            // Puedes agregar aquí la lógica para guardar los datos si es necesario
+            limpiarCampos();
+        }
+
+        function limpiarCampos() {
+            document.getElementById('nombreDispositivo').value = '';
+            document.getElementById('cantidadDispositivos').value = '';
+            document.getElementById('horasUso').value = '';
+            document.getElementById('cantidadW').value = '';
+            document.getElementById('total_energia').value = '';
+        }
+    </script>
+</body>
+<a href="http://127.0.0.1:8000/presentacion" class="boton-volver">Volver</a>
+</body>
+</html>

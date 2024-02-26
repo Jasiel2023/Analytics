@@ -1,0 +1,130 @@
+{% load static %}
+
+  <!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Perfil</title>
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            border-top: 100px solid black;
+        }
+
+        h1 {
+            color: white;
+            margin-top: -12vh;
+            margin-bottom: 50px;
+            margin-left: 200px;
+            text-align: center;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .contenedor {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            flex-wrap: wrap;
+        }
+
+        .formulario,
+        .datos-ingresados {
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            width: 48%;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #207ab2;
+        }
+
+        .boton-volver {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            padding: 10px 15px;
+            background-color: #757575;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .boton-volver:hover {
+            background-color: #444;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="contenedor">
+        <div class="formulario">
+            <h1>Perfil de {{ usuario_actual.username }}</h1>
+            <h2>Ingresar nuevos datos:</h2>
+            <form method="post" action="{% url 'perfil' %}">
+                {% csrf_token %}
+                <label for="user">Nombre:</label>
+                <input type="text" name="user" value="{{ usuario_actual.username }}" required>
+                <label for="gmail">Correo:</label>
+                <input type="text" id="gmail" name="gmail" placeholder="Ingresa tu gmail">
+                <label for="cedula">Cédula:</label>
+                <input type="text" id="cedula" name="cedula" placeholder="Ingresa tu cédula">
+                <label for="direccion">Dirección:</label>
+                <input type="text" id="direccion" name="direccion" placeholder="Ingresa tu direccion">
+                <button type="submit">Guardar cambios</button>
+            </form>
+            <a href="http://127.0.0.1:8000/presentacion" class="boton-volver">Volver</a>
+        </div>
+  <div class="datos-ingresados">
+    <h2>Datos Actuales:</h2>
+    <label for="user">Nombre:</label>
+    <input type="text" name="user" value="{{ usuario_actual.username }}" readonly>
+    <label for="gmail">Correo:</label>
+    <input type="text" name="gmail" value="{{ perfil_usuario.gmail }}" readonly>
+    <label for="cedula">Cédula:</label>
+    <input type="text" name="cedula" value="{{ perfil_usuario.cedula }}" readonly>
+    <label for="direccion">Dirección:</label>
+    <input type="text" name="direccion" value="{{ perfil_usuario.direccion }}" readonly>
+</div>
+    </div>
+</body>
+
+</html>
+

@@ -8,10 +8,64 @@
             margin: 0;
             padding: 0;
         }
+body.dark-mode {
+    background-color: #333 !important;
+    color: #fff !important;
+}
 
+.custom-switch {
+    position: fixed;
+    top: 30px;
+    left: 20px;
+    width: 60px;
+    height: 34px;
+}
+
+.custom-switch input {
+    margin right: 30px;
+}
+
+.slider {
+
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ddd;
+    transition: 0.4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
         .navbar {
+<<<<<<< HEAD
             background-color: #028279;
             padding: 10px 0;
+=======
+
+            background-color: #000;
+            padding: 30px 0;
+>>>>>>> feature
             text-align: center;
         }
 
@@ -27,8 +81,19 @@
             margin: 50px;
         }
 
+<<<<<<< HEAD
         h1 {
             color: #555;
+=======
+                h1 {
+            background: linear-gradient(to right, rgba(255, 255, 255, 0), #4285F4, #FFA500, rgba(255, 255, 255, 0));
+            -webkit-background-clip: text;
+            color: transparent;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+>>>>>>> feature
         }
 
         .paragraph {
@@ -58,6 +123,7 @@
             margin-right: 20px;
         }
 
+<<<<<<< HEAD
         .btn {
             display: inline-block;
             padding: 10px 20px;
@@ -73,6 +139,30 @@
         .btn:hover {
             background-color: #d45d03;
         }
+=======
+.btn {
+    display: inline-block;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #fff;
+    background-color: #3498db;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #207ab2;
+}
+
+@media (max-width: 768px) {
+    .btn {
+        padding: 3px 6px;
+        font-size: 6px;
+    }
+}
+>>>>>>> feature
 
         @media (max-width: 768px) {
             .paragraph {
@@ -87,42 +177,177 @@
                 padding: 8px 16px;
             }
         }
+    .notificacion {
+        border: 2px solid orange;
+        background-color: #FFDDBB;
+        color: #333;
+        padding: 10px;
+        margin: 20px auto;
+        border-radius: 5px;
+        font-weight: bold;
+        width: 80%;
+        text-align: center;
+    }
+.btn_CS{
+
+    bottom: 10px;
+    right: 10px;
+    background-color: #FFA726;
+    color: #000;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.btn_CS:hover {
+    background-color: #FFA726;
+}
+
+  .consulta-box {
+    display: flex;
+    align-items: center;
+    max-width: 400px;
+    margin: 20px auto;
+    position: relative;
+  }
+
+  #userInput {
+    flex: 1;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #4285F4;
+    border-radius: 20px;
+    outline: none;
+  }
+
+  .lupa-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+
+  #enviarButton {
+    display: none;
+  }
+        body {
+    margin: 0;
+    padding: 0;
+}
+
+        .btn-notificacion {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #FF6666;
+            color: #fff;
+            font-size: 20px;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+            z-index: 1000;
+        }
+
+        .btn-notificacion:hover {
+            background-color: #CC3333;
+        }
+
+        .recuadro {
+            display: none;
+            position: fixed;
+            bottom: 70px;
+            right: 10px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 999;
+        }
+
+
+        .notificacion-contenedor {
+
+        }
+
+        .notificacion {
+            margin-bottom: 10px;
+        }
+#respuesta {
+    margin-top: 20px;
+}
+
+#respuesta div {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+#respuesta h3 {
+    color: #4285F4;
+    margin-top: 0;
+}
+
+#respuesta p {
+    color: #555;
+    margin-bottom: 0;
+}
+
     </style>
 
     <div class="navbar">
-        <a href="#" class="btn">Inicio</a>
-        <a href="http://127.0.0.1:8000/RegistroDeDispositivos" class="btn">Inventario</a>
+         <label class="custom-switch">
+        <input type="checkbox" id="modoSwitch">
+        <span class="slider"></span>
+    </label>
+
+    <script>
+ const modoSwitch = document.getElementById('modoSwitch');
+
+
+const modoOscuroGuardado = localStorage.getItem('modoOscuro');
+if (modoOscuroGuardado) {
+    document.body.classList.toggle('dark-mode', JSON.parse(modoOscuroGuardado));
+    modoSwitch.checked = JSON.parse(modoOscuroGuardado);
+}
+
+const posicionInterruptorGuardada = localStorage.getItem('posicionInterruptor');
+if (posicionInterruptorGuardada) {
+    modoSwitch.style.transform = JSON.parse(posicionInterruptorGuardada);
+}
+
+modoSwitch.addEventListener('change', () => {
+    const modoOscuroActivado = modoSwitch.checked;
+
+    document.body.classList.toggle('dark-mode', modoOscuroActivado);
+
+    localStorage.setItem('modoOscuro', JSON.stringify(modoOscuroActivado));
+});
+
+
+modoSwitch.addEventListener('input', () => {
+    const posicionInterruptor = modoSwitch.checked ? 'translateX(10px)' : 'translateX(0)';
+    modoSwitch.style.transform = posicionInterruptor;
+
+    localStorage.setItem('posicionInterruptor', JSON.stringify(posicionInterruptor));
+});
+    </script>
+        <a href="http://127.0.0.1:8000/perfil" class="btn">Perfil</a>
+        <a href="http://127.0.0.1:8000/RegistroDispositivos" class="btn">Registro</a>
         <a href="http://127.0.0.1:8000/GenerarInforme" class="btn">Informe</a>
-        <a href="#" class="btn">Diagramas</a>
-    </div>
-           <div class="welcome-container">
-        <h1>Bienvenido al Sistema</h1>
-
-        <div class="paragraph">
-            Este programa te permitirá calcular el consumo eléctrico de tus dispositivos para verificar y ahorrar la mayor energía posible, contribuyendo de manera efectiva al consumo energético eficiente.
-        </div>
-
-        <div class="paragraph instruction">
-            Para ello, el programa te permitirá elegir entre diversos dispositivos comunes en los hogares.
-        </div>
-
-        <div class="paragraph instruction">
-            Después debe seleccionar el dispositivo electrónico del cual deseé tener información.
-        </div>
-
-        <div class="paragraph instruction">
-            Deberá ingresar las horas que deseas utilizarlo y la cantidad de energía que consume.
-        </div>
-
-        <div class="paragraph instruction">
-            Una vez completado el formulario, podrá visualizar el consumo estimado de energía para el dispositivo seleccionado.
-        </div>
-
-        <nav>
-            <ul>
-                {% if user.is_authenticated %}
+        <a href="http://127.0.0.1:8000/Estadisticas" class="btn">Diagramas</a>
+         {% if user.is_authenticated %}
                     <li>
-                        <a href="/cerrarSesion" class="btn">Cerrar Sesión</a>
+                        <a href="/cerrarSesion" class="btn_CS">Cerrar Sesión</a>
 
                     </li>
                 {% else %}
@@ -131,7 +356,93 @@
                         <a href="http://127.0.0.1:8000/iniciarSesion" class="btn">Iniciar Sesión</a>
                     </li>
                 {% endif %}
-            </ul>
-        </nav>
     </div>
+           <div class="welcome-container">
+        <h1>ElectricAnalytics</h1>
+               <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<div class="consulta-box">
+    <label for="userInput" style="display: none;">Tu consulta:</label>
+    <input type="text" id="userInput" placeholder="Realiza tu consulta...">
+    <span class="lupa-icon" onclick="enviarConsulta()">&#128269;</span>
+
+    <button id="enviarButton">Enviar</button>
+</div>
+
+<div id="respuesta"></div>
+
+      <button class="btn-notificacion" onclick="mostrarNotificaciones()">⚠</button>
+
+
+    <div id="contenedorRecuadro" class="recuadro">
+
+        <div id="contenedorNotificaciones" class="notificacion-contenedor">
+
+        </div>
+    </div>
+
+    <script>
+        function mostrarNotificaciones() {
+            const contenedorRecuadro = document.getElementById('contenedorRecuadro');
+            const contenedorNotificaciones = document.getElementById('contenedorNotificaciones');
+
+
+            contenedorRecuadro.style.display = contenedorRecuadro.style.display === 'none' ? 'block' : 'none';
+
+
+            if (contenedorRecuadro.style.display === 'block') {
+
+                contenedorNotificaciones.innerHTML = '';
+                verificarConsumoDispositivos(contenedorNotificaciones);
+            }
+        }
+
+
+        function verificarConsumoDispositivos(contenedor) {
+            {% for dispositivo in dispositivos %}
+                var totalEnergia = {{ dispositivo.total_energia }};
+                var nombre = "{{ dispositivo.nombre_dispositivo }}";
+
+                if (totalEnergia > 1000) {
+                    var dispositivoInfo = document.createElement('div');
+                    dispositivoInfo.className = 'notificacion';
+                    dispositivoInfo.innerHTML = `Este dispositivo: ${nombre}, está consumiendo: ${totalEnergia} KW, lo cual es un exceso de energía. `;
+
+                    contenedor.appendChild(dispositivoInfo);
+                }
+            {% endfor %}
+        }
+    function enviarConsulta() {
+        var userInput = document.getElementById('userInput').value;
+        var apiKey = 'AIzaSyAqhUSex2MzrOIOVDEgI_-sjfkIfYDLDbE';
+        var cseId = 'b2b64b22095464355';
+        var url = `https://www.googleapis.com/customsearch/v1?q=${userInput}&key=${apiKey}&cx=${cseId}`;
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => mostrarResultados(data))
+            .catch(error => console.error('Error en la búsqueda:', error));
+    }
+
+    function mostrarResultados(data) {
+        var respuestaDiv = document.getElementById('respuesta');
+        respuestaDiv.innerHTML = '';
+
+        if (data.items && data.items.length > 0) {
+            for (var i = 0; i < data.items.length; i++) {
+                var resultado = data.items[i];
+                var enlace = resultado.link;
+                var titulo = resultado.title;
+                var snippet = resultado.snippet;
+
+                var resultadoDiv = document.createElement('div');
+                resultadoDiv.innerHTML = `<h3><a href="${enlace}" target="_blank">${titulo}</a></h3><p>${snippet}</p>`;
+
+                respuestaDiv.appendChild(resultadoDiv);
+            }
+        } else {
+            respuestaDiv.innerHTML = '<p>No se encontraron resultados.</p>';
+        }
+    }
+</script>
+
 {% endblock %}

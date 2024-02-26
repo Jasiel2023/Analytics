@@ -24,11 +24,17 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('iniciarSesion/',  views.iniciarSesion, name= 'iniciarSesion'),
     path('presentacion/', views.presentacion, name='presentacion'),
-    path('FormularioDeDispositivos/', views.FormularioDeDispositivos, name='Dispositivos'),
-    path('GenerarInforme/', views.GenerarInforme, name='GenerarInforme'),
-    path('RegistroDeDispositivos/', views.RegistroDeDispositivos, name='RegistroDeDispositivos'),
+path('perfil/',  views.perfil, name= 'perfil'),
+path('RegistroDispositivos/', views.RegistroDispositivos, name="RegistroDispositivos"),
+path('GenerarInforme/', views.GenerarInforme, name='GenerarInforme'),
+path('Estadisticas/', views.Estadisticas, name='Estadisticas'),
     path('registro/', views.registro, name='registro'),
     path('cerrarSesion/', views.cerrarSesion, name='cerrarSesion'),
     path('Inicio/', views.inicio, name='inicio')
+<<<<<<< HEAD
 ]
 
+=======
+
+]
+>>>>>>> feature

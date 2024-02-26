@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Estadísticas</title>
+    <link rel="stylesheet" href="{% static 'styleE.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+   <div class="header">
+        <h1>Estadísticas</h1>
+    </div>
+
+    <canvas id="miGraficoDePie" width="400" height="400"></canvas>
+
+
+    <div>
+        <h3>Dispositivo que más consume:</h3>
+        <p id="dispositivoMasConsumo">
+            {% if dispositivo_mas_consumo %}
+                {{ dispositivo_mas_consumo.nombre_dispositivo }} - {{ dispositivo_mas_consumo.total_energia }}
+            {% else %}
+                No hay dispositivos registrados.
+            {% endif %}
+        </p>
+    </div>
+
+    <script>
+    var ctx = document.getElementById('miGraficoDePie').getContext('2d');
+var miGraficoDePie = new Chart(ctx, {
+    type: 'pie',
+    data: {
+        labels: [{% for dispositivo in dispositivos_json %}"{{ dispositivo.nombre_dispositivo }}",{% endfor %}],
+        datasets: [{
+            data: [{% for dispositivo in dispositivos_json %}{{ dispositivo.total_energia }},{% endfor %}],
+            backgroundColor: obtenerColoresAleatorios({{ dispositivos_json|length }}),
+        }],
+    },
+});
+
+        function obtenerColoresAleatorios(cantidad) {
+            var colores = [];
+            for (var i = 0; i < cantidad; i++) {
+                colores.push(obtenerColorAleatorio());
+            }
+            return colores;
+        }
+
+        function obtenerColorAleatorio() {
+            var letras = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letras[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        mostrarDispositivoMasConsumo();
+
+        function mostrarDispositivoMasConsumo() {
+            if (dispositivo_mas_consumo !== null) {
+                document.getElementById('dispositivoMasConsumo').innerText =
+                    dispositivo_mas_consumo.nombre_dispositivo + ' - ' + dispositivo_mas_consumo.total_energia;
+            }
+        }
+    </script>
+     <a href="http://127.0.0.1:8000/presentacion" class="boton-volver">Volver</a>
+</body>
+</html>

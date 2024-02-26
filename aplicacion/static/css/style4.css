@@ -1,4 +1,4 @@
- body {
+  body {
             font-family: 'Arial', sans-serif;
             background: linear-gradient(to bottom, #59b4ff, #ffaa5c) no-repeat center center fixed;
             margin: 0;
@@ -11,7 +11,7 @@
 
         .formulario {
             background-color: #fff;
-            padding: 30px;
+            padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: left;
@@ -21,6 +21,7 @@
             position: relative;
             z-index: 1;
             margin-top: 20px;
+            height: 600px;
 
         }
         .formulario::before {
@@ -48,8 +49,8 @@
         input[type="password"],
         button {
             width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
+            padding: 10px;
+            margin-bottom: 10px;
             border: 2px solid #9b9b9b;
             border-radius: 10px;
             outline: none;
