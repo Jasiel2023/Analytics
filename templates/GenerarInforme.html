@@ -58,19 +58,6 @@
         border-bottom: 2px solid #333;
     }
 
-button[type="submit"] {
-    background-color: #ff0000;
-    color: #ffffff;
-    padding: 6px 12px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-button[type="submit"]:hover {
-    background-color: #cc0000;
-}
     .boton-volver {
         position: fixed;
         bottom: 20px;
@@ -86,7 +73,6 @@ button[type="submit"]:hover {
     .boton-volver:hover {
         background-color: #444;
     }
-
 </style>
 <body>
     <div class="container">
@@ -97,21 +83,12 @@ button[type="submit"]:hover {
                     <span>Dispositivo</span>
                     <span>ConsumoKW</span>
                     <span>Fecha de registro</span>
-                    <span>Eliminar</span>
                 </li>
                 {% for dispositivo in dispositivos %}
                     <li class="dispositivo-item">
                         <span>{{ dispositivo.nombre_dispositivo }}</span>
                         <span>{{ dispositivo.total_energia }}</span>
                         <span>{{ dispositivo.fecha_registro|date:"Y-m-d" }}</span>
-                        <span>
-                            <form method="post" action="{% url 'GenerarInforme' %}">
-                                {% csrf_token %}
-                                <input type="hidden" name="dispositivo_id" value="{{ dispositivo.id }}">
-                                {{ form.as_p }}
-                                <button type="submit">Eliminar</button>
-                            </form>
-                        </span>
                     </li>
                 {% endfor %}
             </ul>
