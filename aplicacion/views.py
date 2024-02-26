@@ -124,9 +124,8 @@ def perfil(request):
 from django.shortcuts import render
 from .models import Dispositivo
 
-from django.db.models import Max
+from itertools import groupby
 
-from django.db.models import Sum
 from itertools import groupby
 
 def Estadisticas(request):
@@ -149,6 +148,7 @@ def Estadisticas(request):
 
     # Pasa los datos a la plantilla
     return render(request, 'Estadisticas.html', {'dispositivos_json': dispositivos_json, 'dispositivo_mas_consumo': dispositivo_mas_consumo})
+
 def serialize_dispositivos(dispositivos):
     # Convierte los datos de dispositivos a un formato JSON
     serialized_dispositivos = []
