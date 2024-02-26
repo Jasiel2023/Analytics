@@ -11,7 +11,7 @@
 <style>
        body {
         font-family: 'Arial', sans-serif;
-        background-image: url('fondoDispositivo.png');
+  background-color: #f0f0f0;
          background-size: cover;
     background-position: center;
         color: #333;
@@ -19,6 +19,10 @@
         padding: 0;
         border-top: 100px solid black;
     }
+body.dark-mode {
+    background-color: #333 !important;
+    color: #fff !important;
+}
 
     .container {
         max-width: 800px;
@@ -31,9 +35,8 @@
         margin-top: -12vh;
         margin-bottom: 50px;
         text-align: center;
-        position: fixed;
         left: 50%;
-        transform: translateX(-50%);
+
     }
 
     .dispositivos-list {
@@ -98,7 +101,7 @@ button[type="submit"]:hover {
                     <span>Dispositivo</span>
                     <span>ConsumoKW</span>
                     <span>Fecha de registro</span>
-                    <span>Eliminar</span>
+                    <span>Eliminar Registro</span>
                 </li>
                 {% for dispositivo in dispositivos %}
                     <li class="dispositivo-item">
@@ -124,5 +127,15 @@ button[type="submit"]:hover {
         {% endif %}
         <a href="http://127.0.0.1:8000/presentacion" class="boton-volver">Volver</a>
     </div>
+<script>
+    const modoSwitch = document.getElementById('modoSwitch');
+
+// Verificar si el modo oscuro está activado en el almacenamiento local
+const modoOscuroGuardado = localStorage.getItem('modoOscuro');
+if (modoOscuroGuardado) {
+    document.body.classList.toggle('dark-mode', JSON.parse(modoOscuroGuardado));
+    modoSwitch.checked = JSON.parse(modoOscuroGuardado);
+}
+</script>
 </body>
 </html>

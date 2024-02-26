@@ -1,9 +1,5 @@
-from enum import Enum
-from django.db import models
 from django.contrib.auth.models import User
-# Create your models here.
 from django.db import models
-from django.contrib.auth.models import User
 
 class Registro(models.Model):
     registro = models.CharField(max_length=80)
@@ -11,15 +7,12 @@ class Registro(models.Model):
     def __str__(self):
         return self.registro
 
-from django.contrib.auth.models import User
 from django.db import models
-
 class Usuario(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     cedula = models.CharField(max_length=10, blank=True, null=True)
     gmail = models.EmailField(blank=True, null=True)
-    direccion = models.CharField(max_length=255, blank=True, null=True)
-
+    direccion = models.TextField()
     def __str__(self):
         return self.user.username
 class MedidorDeConsumo(models.Model):
@@ -43,8 +36,6 @@ class registroDispositivos(models.Model):
 
     def __str__(self):
         return self.consumoKwh
-
-
 
 class Dispositivo(models.Model):
     # Campos de texto
