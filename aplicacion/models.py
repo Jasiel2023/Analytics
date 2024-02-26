@@ -29,8 +29,8 @@ class MedidorDeConsumo(models.Model):
         return self.consumoTotal
 
 class Informe(models.Model):
-    fechaAnalisis = models.DateField()
 
+    fechaAnalisis = models.DateField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):

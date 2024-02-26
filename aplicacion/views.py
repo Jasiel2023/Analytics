@@ -132,10 +132,9 @@ from itertools import groupby
 from itertools import groupby
 
 def Estadisticas(request):
-    # Obtén los datos de dispositivos desde tu modelo
+
     dispositivos = Dispositivo.objects.all().order_by('nombre_dispositivo')
 
-    # Agrupa los dispositivos por nombre y suma las energías
     dispositivos_agrupados = []
     for key, group in groupby(dispositivos, key=lambda x: x.nombre_dispositivo):
         dispositivos_agrupados.append({

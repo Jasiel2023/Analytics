@@ -1,6 +1,6 @@
 {% load static %}
 
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -18,18 +18,18 @@
 
         h1 {
             color: white;
-            margin-top: -12vh;
-            margin-bottom: 50px;
+            margin-top: -15vh;
+            margin-bottom: 80px;
             margin-left: 200px;
             text-align: center;
             left: 50%;
-            transform: translateX(-50%);
+            transform: translateX(60%);
         }
 
         .contenedor {
             display: flex;
             justify-content: space-between;
-            padding: 20px;
+            padding: 30px;
             flex-wrap: wrap;
         }
 
@@ -43,7 +43,12 @@
             box-sizing: border-box;
             margin-bottom: 20px;
         }
-
+@media (max-width: 767px) {
+    .formulario,
+    .datos-ingresados {
+        width: 100%;
+    }
+}
         form {
             margin-top: 20px;
         }
