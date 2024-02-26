@@ -1,7 +1,3 @@
-
-from aplicacion.models import registroDispositivos
-from .forms import InformeForm
-
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
@@ -25,10 +21,6 @@ def registro(request):
                                               "error": 'Username ya existe'})
         return render(request, 'registro.html', {'form': UserCreationForm,
                                                  "error": 'Contraseña no coincide'})
-
-def GenerarInforme(request):
-    return render(request, 'GenerarInforme.html', {
-        'form' : InformeForm })
 
 def inicio(request):#ojo a esto
     return render(request, 'inicio.html')
@@ -59,7 +51,7 @@ def iniciarSesion(request):
 
 from . forms import DispositivoForm
 
-def formulario(request):
+def RegistroDispositivos(request):
     if request.method == 'POST':
         form = DispositivoForm(request.POST)
         if form.is_valid():
@@ -67,7 +59,7 @@ def formulario(request):
 
     else:
         form = DispositivoForm()
-    return render(request, 'formulario.html', {'form': form})
+    return render(request, 'RegistroDispositivos.html', {'form': form})
 
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Dispositivo
@@ -137,7 +129,7 @@ from django.db.models import Max
 from django.db.models import Sum
 from itertools import groupby
 
-def FormularioDeDispositivos(request):
+def Estadisticas(request):
     # Obtén los datos de dispositivos desde tu modelo
     dispositivos = Dispositivo.objects.all()
 
@@ -156,7 +148,7 @@ def FormularioDeDispositivos(request):
     dispositivos_json = serialize_dispositivos(dispositivos_agrupados)
 
     # Pasa los datos a la plantilla
-    return render(request, 'FormularioDeDispositivos.html', {'dispositivos_json': dispositivos_json, 'dispositivo_mas_consumo': dispositivo_mas_consumo})
+    return render(request, 'Estadisticas.html', {'dispositivos_json': dispositivos_json, 'dispositivo_mas_consumo': dispositivo_mas_consumo})
 def serialize_dispositivos(dispositivos):
     # Convierte los datos de dispositivos a un formato JSON
     serialized_dispositivos = []

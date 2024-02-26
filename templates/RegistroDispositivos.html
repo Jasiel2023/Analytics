@@ -4,105 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <link rel="stylesheet" href="{% static 'css/styleRD.css' %}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/styleRD.css' %}">
     <title>Registra tus dispositivos</title>
-    <style>
-  body {
-    background-image: url('fondoDispositivo.png');
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    font-family: Arial, sans-serif;
-    border-top: 100px solid black;
-}
-.header {
-    background-color: black;
-    color: white;
-    padding: 10px;
-    text-align: center;
-}
-h1 {
-    color: white;
-    margin-top: -200px;
-    margin-bottom: 50px;
-    text-align: center;
-}
-
-#formularioDispositivos {
-    border-radius: 8px;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-form {
-margin-top: 40px;
-    border-radius: 8px;
-    text-align: left;
-    display: inline-block;
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.8);
-    border-radius: 10px;
-}
-
-label {
-    display: block;
-    margin-bottom: 5px;
-    color: #333;
-}
-
-input {
-    border-radius: 8px;
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    box-sizing: border-box;
-}
-
-input[type="button"] {
-    background-color: #757575;
-    color: white;
-    cursor: pointer;
-    padding: 10px;
-    border: none;
-    border-radius: 10px;
-    transition: background-color 0.3s;
-}
-
-input[type="button"]:hover {
-    background-color: #444;
-}
-   .btn {
-            background-color: #757575;
-            color: white;
-            cursor: pointer;
-            padding: 10px;
-            border: none;
-            border-radius: 10px;
-            transition: background-color 0.3s;
-        }
-
-        .btn:hover {
-            background-color: #444;
-        }
-        .boton-volver {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    padding: 10px 15px;
-    background-color: #757575;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-.boton-volver:hover {
-    background-color: #444;
-}
-    </style>
 </head>
 <body>
 {% if form.errors %}
@@ -113,7 +17,7 @@ input[type="button"]:hover {
     <div id="registroDispositivos">
         <h1>Registra tus Dispositivos</h1>
 
-        <form action="{% url 'formulario' %}" method="POST">
+        <form action="{% url 'RegistroDispositivos' %}" method="POST">
             {% csrf_token %}
             {% if mensaje %}
                 <div class="alert alert-success" role="alert">
@@ -183,12 +87,6 @@ input[type="button"]:hover {
         }
     </script>
 </body>
-
-
-
-
-
-
 <a href="http://127.0.0.1:8000/presentacion" class="boton-volver">Volver</a>
 </body>
 </html>

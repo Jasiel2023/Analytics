@@ -3,92 +3,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Gráfico de Pie con Dispositivos</title>
+    <title>Estadísticas</title>
+    <link rel="stylesheet" href="{% static 'styleE.css' %}">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<style>
-    body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    }
-}
-.header {
-    background-color: black;
-    color: white;
-    padding: 10px;
-    text-align: center;
-}
 
-h1 {
-    margin: 0;
-}
-
-/* Estilo adicional para el lienzo del gráfico */
-#miGraficoDePie {
-    max-width: 100%;  /* Ajusta el ancho máximo según sea necesario */
-    margin: 0 auto;   /* Centra el lienzo horizontalmente */
-    display: block;   /* Elimina el espacio adicional debajo del lienzo */
-}
-canvas {
-    display: block;
-    margin: auto;
-    margin-top: 20px;
-}
-
-div {
-    text-align: center;
-    margin-top: 20px;
-}
-
-h3 {
-    color: #333;
-}
-
-p {
-    font-size: 18px;
-    color: #555;
-}
-
-/* Estilos adicionales para mejorar la visualización del gráfico de pie */
-#miGraficoDePie {
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-/* Estilos para el mensaje de dispositivo que más consume */
-#dispositivoMasConsumo {
-    margin-top: 10px;
-    padding: 10px;
-    background-color: #f0f0f0;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    display: inline-block;
-}
-          .boton-volver {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            padding: 10px 15px;
-            background-color: #757575;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-
-        .boton-volver:hover {
-            background-color: #444;
-        }
-
-</style>
 <body>
    <div class="header">
         <h1>Estadísticas</h1>
     </div>
-    <!-- Lienzo para el gráfico de pie -->
+
     <canvas id="miGraficoDePie" width="400" height="400"></canvas>
 
-    <!-- Mostrar el dispositivo que más consume -->
+
     <div>
         <h3>Dispositivo que más consume:</h3>
         <p id="dispositivoMasConsumo">
@@ -112,7 +39,7 @@ var miGraficoDePie = new Chart(ctx, {
         }],
     },
 });
-        // Función para obtener colores aleatorios
+
         function obtenerColoresAleatorios(cantidad) {
             var colores = [];
             for (var i = 0; i < cantidad; i++) {
@@ -121,7 +48,6 @@ var miGraficoDePie = new Chart(ctx, {
             return colores;
         }
 
-        // Función para obtener un color aleatorio
         function obtenerColorAleatorio() {
             var letras = '0123456789ABCDEF';
             var color = '#';
@@ -131,7 +57,6 @@ var miGraficoDePie = new Chart(ctx, {
             return color;
         }
 
-        // Mostrar el dispositivo que más consume
         mostrarDispositivoMasConsumo();
 
         function mostrarDispositivoMasConsumo() {

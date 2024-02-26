@@ -5,75 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Informes</title>
-    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link rel="stylesheet" href="{% static 'styleGI.css' %}">
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCD97GWCOY6Lqg_YxlpETbMtBLTwKUDVjU&libraries=places"></script>
 </head>
-<style>
-    body {
-        font-family: 'Arial', sans-serif;
-        background-image: url('fondoDispositivo.png');
-        color: #333;
-        margin: 0;
-        padding: 0;
-        border-top: 100px solid black;
-    }
 
-    .container {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
-    }
-
-    h1 {
-        color: white;
-        margin-top: -12vh;
-        margin-bottom: 50px;
-        text-align: center;
-        position: fixed;
-        left: 50%;
-        transform: translateX(-50%);
-    }
-
-    .dispositivos-list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-
-    .dispositivo-item {
-        border-bottom: 1px solid #ddd;
-        padding: 10px 0;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .dispositivo-item span {
-        flex: 1;
-        text-align: center;
-    }
-
-    .encabezado {
-        font-weight: bold;
-        border-bottom: 2px solid #333;
-    }
-
-    .boton-volver {
-        position: fixed;
-        bottom: 20px;
-        left: 20px;
-        padding: 10px 15px;
-        background-color: #757575;
-        color: #fff;
-        text-decoration: none;
-        border-radius: 5px;
-        transition: background-color 0.3s ease;
-    }
-
-    .boton-volver:hover {
-        background-color: #444;
-    }
-</style>
 <body>
     <div class="container">
         <h1>Informe de registros</h1>
@@ -83,12 +18,21 @@
                     <span>Dispositivo</span>
                     <span>ConsumoKW</span>
                     <span>Fecha de registro</span>
+                    <span>Eliminar</span>
                 </li>
                 {% for dispositivo in dispositivos %}
                     <li class="dispositivo-item">
                         <span>{{ dispositivo.nombre_dispositivo }}</span>
                         <span>{{ dispositivo.total_energia }}</span>
                         <span>{{ dispositivo.fecha_registro|date:"Y-m-d" }}</span>
+                        <span>
+                            <form method="post" action="{% url 'GenerarInforme' %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="dispositivo_id" value="{{ dispositivo.id }}">
+                                {{ form.as_p }}
+                                <button type="submit">Eliminar</button>
+                            </form>
+                        </span>
                     </li>
                 {% endfor %}
             </ul>
