@@ -126,11 +126,14 @@ from .models import Dispositivo
 
 from itertools import groupby
 
+from django.db.models import Sum
+from itertools import groupby
+
 from itertools import groupby
 
 def Estadisticas(request):
     # Obtén los datos de dispositivos desde tu modelo
-    dispositivos = Dispositivo.objects.all()
+    dispositivos = Dispositivo.objects.all().order_by('nombre_dispositivo')
 
     # Agrupa los dispositivos por nombre y suma las energías
     dispositivos_agrupados = []
@@ -140,17 +143,14 @@ def Estadisticas(request):
             'total_energia': sum(item.total_energia for item in group),
         })
 
-    # Calcula el dispositivo que más consume
     dispositivo_mas_consumo = max(dispositivos_agrupados, key=lambda x: x['total_energia'], default=None)
 
-    # Convierte los datos a un formato que pueda ser procesado por JavaScript en la plantilla
     dispositivos_json = serialize_dispositivos(dispositivos_agrupados)
 
-    # Pasa los datos a la plantilla
-    return render(request, 'Estadisticas.html', {'dispositivos_json': dispositivos_json, 'dispositivo_mas_consumo': dispositivo_mas_consumo})
 
+    return render(request, 'Estadisticas.html', {'dispositivos_json': dispositivos_json, 'dispositivo_mas_consumo': dispositivo_mas_consumo})
 def serialize_dispositivos(dispositivos):
-    # Convierte los datos de dispositivos a un formato JSON
+
     serialized_dispositivos = []
     for dispositivo in dispositivos:
         serialized_dispositivo = {
