@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 from django.db import models
-=======
->>>>>>> origin/feature
 from django.contrib.auth.models import User
 from django.db import models
 
