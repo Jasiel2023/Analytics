@@ -10,6 +10,9 @@
 <style>
        body {
     font-family: Arial, sans-serif;
+     background-image: url('fondoDispositivo.png');
+         background-size: cover;
+    background-position: center;
     margin: 20px;
     margin: 0;
     padding: 0;
@@ -17,7 +20,7 @@
     }
 }
 .header {
-    background-color: black;
+
     color: white;
     padding: 10px;
     text-align: center;
@@ -93,10 +96,9 @@ p {
 
 
     <div>
-        <h3>Dispositivo que más consume:</h3>
         <p id="dispositivoMasConsumo">
             {% if dispositivo_mas_consumo %}
-                {{ dispositivo_mas_consumo.nombre_dispositivo }} - {{ dispositivo_mas_consumo.total_energia }}
+                {{ dispositivo_mas_consumo.nombre_dispositivo }}: {{ dispositivo_mas_consumo.total_energia }} W
             {% else %}
                 No hay dispositivos registrados.
             {% endif %}

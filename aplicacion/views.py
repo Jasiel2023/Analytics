@@ -2,6 +2,15 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError
+from . forms import DispositivoForm
+from django.shortcuts import redirect
+from .models import Dispositivo
+from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponseRedirect
+from .models import Usuario
+from .forms import UsuarioForm
+from itertools import groupby
+
 def index(request):
     return render(request, 'index.html')
 
@@ -47,9 +56,6 @@ def iniciarSesion(request):
             login(request, user)
             return redirect('presentacion')
 
-###
-
-from . forms import DispositivoForm
 
 def RegistroDispositivos(request):
     if request.method == 'POST':
@@ -61,10 +67,6 @@ def RegistroDispositivos(request):
         form = DispositivoForm()
     return render(request, 'RegistroDispositivos.html', {'form': form})
 
-from django.shortcuts import render, redirect, get_object_or_404
-from .models import Dispositivo
-
-
 def GenerarInforme(request):
     dispositivos = Dispositivo.objects.all()
 
@@ -75,7 +77,7 @@ def GenerarInforme(request):
         return redirect('GenerarInforme')
 
     return render(request, 'GenerarInforme.html', {'dispositivos': dispositivos})
-from aplicacion.models import Dispositivo
+
 
 def presentacion(request):
 
@@ -85,52 +87,34 @@ def presentacion(request):
 
     return render(request, 'presentacion.html', context)
 
-
-from django.shortcuts import render, redirect
-from .models import Usuario
-from .forms import UsuarioForm
-
 def perfil(request):
-    usuario_actual = request.user
-    perfil_usuario, creado = Usuario.objects.get_or_create(user=usuario_actual)
 
-    # Obtener datos ingresados almacenados en la sesión
-    datos_ingresados = request.session.get('datos_ingresados', {})
+    usuario_instance, created = Usuario.objects.get_or_create(user=request.user)
+    has_perfil = created
 
     if request.method == 'POST':
-        form = UsuarioForm(request.POST, instance=perfil_usuario)
-
-        if form.is_valid():
-            form.save()
-
-            # Actualizar datos ingresados después de guardar el formulario
-            datos_ingresados = {
-                'Nombre': perfil_usuario.user.username,
-                'Cédula': perfil_usuario.cedula,
-                'Correo': perfil_usuario.gmail,
-                'Dirección': perfil_usuario.direccion,
-            }
-
-            # Almacenar los datos en la sesión
-            request.session['datos_ingresados'] = datos_ingresados
-
-            return redirect('perfil')  # Redirigir para evitar reenvío del formulario al actualizar la página
-
+        perfil_form = UsuarioForm(request.POST, instance=usuario_instance)
+        if perfil_form.is_valid():
+            perfil_form.save()
+            return HttpResponseRedirect('/')
     else:
-        form = UsuarioForm(instance=perfil_usuario)
+        perfil_form = UsuarioForm(instance=usuario_instance)
 
-    return render(request, 'perfil.html', {'usuario_actual': usuario_actual, 'perfil_usuario': perfil_usuario, 'form': form, 'datos_ingresados': datos_ingresados})
+    return render(request, 'perfil.html', {'perfil_form': perfil_form, 'has_perfil': has_perfil})
 
-from django.shortcuts import render
-from .models import Dispositivo
+def editar_perfil(request, user_id):
+    usuario = get_object_or_404(User, id=user_id)
+    usuario_instance = get_object_or_404(Usuario, user=usuario)
 
-from itertools import groupby
+    if request.method == 'POST':
+        perfil_form = UsuarioForm(request.POST, instance=usuario_instance)
+        if perfil_form.is_valid():
+            perfil_form.save()
+            return HttpResponseRedirect('/')
+    else:
+        perfil_form = UsuarioForm(instance=usuario_instance)
 
-from django.db.models import Sum
-from itertools import groupby
-
-from itertools import groupby
-
+    return render(request, 'perfil.html', {'perfil_form': perfil_form, 'has_perfil': True})
 def Estadisticas(request):
 
     dispositivos = Dispositivo.objects.all().order_by('nombre_dispositivo')
@@ -159,3 +143,6 @@ def serialize_dispositivos(dispositivos):
         serialized_dispositivos.append(serialized_dispositivo)
 
     return serialized_dispositivos
+
+
+
