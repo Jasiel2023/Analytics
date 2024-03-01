@@ -108,18 +108,32 @@ p {
             {% endif %}
         </p>
     </div>
-       <script>
-    var ctx = document.getElementById('miGraficoDePie').getContext('2d');
-var miGraficoDePie = new Chart(ctx, {
-    type: 'pie',
-    data: {
-        labels: [{% for dispositivo in dispositivos_json %}"{{ dispositivo.nombre_dispositivo }}",{% endfor %}],
-        datasets: [{
-            data: [{% for dispositivo in dispositivos_json %}{{ dispositivo.total_energia }},{% endfor %}],
-            backgroundColor: obtenerColoresAleatorios({{ dispositivos_json|length }}),
-        }],
-    },
-});
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var ctx = document.getElementById('miGraficoDePie').getContext('2d');
+        var dispositivosJson = {{ dispositivos_json|safe }};
+        var dispositivoMasConsumo = {{ dispositivo_mas_consumo|safe }};
+
+        var nombresDispositivos = dispositivosJson.map(function(dispositivo) {
+            return dispositivo.nombre_dispositivo;
+        });
+
+        var energiasDispositivos = dispositivosJson.map(function(dispositivo) {
+            return dispositivo.total_energia;
+        });
+
+        var coloresDispositivos = obtenerColoresAleatorios(dispositivosJson.length);
+
+        var miGraficoDePie = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: nombresDispositivos,
+                datasets: [{
+                    data: energiasDispositivos,
+                    backgroundColor: coloresDispositivos,
+                }],
+            },
+        });
 
         function obtenerColoresAleatorios(cantidad) {
             var colores = [];
@@ -141,52 +155,13 @@ var miGraficoDePie = new Chart(ctx, {
         mostrarDispositivoMasConsumo();
 
         function mostrarDispositivoMasConsumo() {
-            if (dispositivo_mas_consumo !== null) {
+            if (dispositivoMasConsumo !== null) {
                 document.getElementById('dispositivoMasConsumo').innerText =
-                    dispositivo_mas_consumo.nombre_dispositivo + ' - ' + dispositivo_mas_consumo.total_energia;
+                    dispositivoMasConsumo.nombre_dispositivo + ' - ' + dispositivoMasConsumo.total_energia;
             }
-        }$(document).ready(function(){
-    var ctx = document.getElementById('miGraficoDePie').getContext('2d');
-    var nombresDispositivos = [];
-    var energiasDispositivos = [];
-    var coloresDispositivos = [];
-
-    {% for dispositivo in dispositivos_json %}
-        nombresDispositivos.push("{{ dispositivo.nombre_dispositivo }}");
-        energiasDispositivos.push({{ dispositivo.total_energia }});
-        coloresDispositivos.push(obtenerColorAleatorio());
-    {% endfor %}
-
-    var miGraficoDePie = new Chart(ctx, {
-        type: 'pie',
-        data: {
-            labels: nombresDispositivos,
-            datasets: [{
-                data: energiasDispositivos,
-                backgroundColor: coloresDispositivos,
-            }],
-        },
+        }
     });
-
-    function obtenerColorAleatorio() {
-        var letras = '0123456789ABCDEF';
-        var color = '#';
-        for (var i = 0; i < 6; i++) {
-            color += letras[Math.floor(Math.random() * 16)];
-        }
-        return color;
-    }
-
-    mostrarDispositivoMasConsumo();
-
-    function mostrarDispositivoMasConsumo() {
-        if (dispositivo_mas_consumo !== null) {
-            document.getElementById('dispositivoMasConsumo').innerText =
-                dispositivo_mas_consumo.nombre_dispositivo + ' - ' + dispositivo_mas_consumo.total_energia;
-        }
-    }
-});
-    </script>
+</script>
 
      <a href="http://127.0.0.1:8000/presentacion" class="boton-volver">Atras</a>
 </body>
