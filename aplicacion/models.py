@@ -12,7 +12,7 @@ class Usuario(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     cedula = models.CharField(max_length=10, blank=True, null=True)
     gmail = models.EmailField(blank=True, null=True)
-    direccion = models.TextField(blank=True, null=True)  # Permitir nulo en el campo dirección
+    direccion = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.user.username
@@ -47,7 +47,26 @@ class Dispositivo(models.Model):
     total_energia = models.FloatField(default=0.0)
     fecha_registro = models.DateTimeField(auto_now=True)
 
+
     def __str__(self):
         return self.nombre_dispositivo
 
 
+################
+
+from django.db import models
+
+class GeneracionEnergia(models.Model):
+    TIPOS_ENERGIA = [
+        ('solar', 'Panel Solar'),
+        ('eolico', 'Eólico'),
+    ]
+
+    tipo_energia = models.CharField(max_length=10, choices=TIPOS_ENERGIA)
+    capacidad_generacion = models.FloatField(help_text='Capacidad de generación en kW')
+    ubicacion = models.CharField(max_length=100, help_text='Ubicación del generador')
+    fecha_instalacion = models.DateField(help_text='Fecha de instalación')
+    ## medidor = models.ForeignKey()
+
+    def __str__(self):
+        return f'{self.get_tipo_energia_display()} - {self.ubicacion}'

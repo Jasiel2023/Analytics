@@ -2,7 +2,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import logout, authenticate
 from . forms import DispositivoForm
-from .models import Dispositivo
+from .models import Dispositivo, GeneracionEnergia
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
 from .models import Usuario
@@ -70,15 +70,15 @@ def iniciarSesion(request):
 
 
 def RegistroDispositivos(request):
+    generadores_energia = GeneracionEnergia.objects.all()
     if request.method == 'POST':
         form = DispositivoForm(request.POST)
         if form.is_valid():
             form.save()
-
     else:
         form = DispositivoForm()
-    return render(request, 'RegistroDispositivos.html', {'form': form})
 
+    return render(request, 'RegistroDispositivos.html', {'form': form, 'generadores_energia': generadores_energia})
 def GenerarInforme(request):
     dispositivos = Dispositivo.objects.all()
 
@@ -110,7 +110,7 @@ def perfil(request):
         perfil_form = UsuarioForm(request.POST, instance=usuario_instance)
         if perfil_form.is_valid():
             perfil_form.save()
-            return redirect('perfil')  # Redirige a la página de perfil
+            return redirect('perfil')
     else:
         perfil_form = UsuarioForm(instance=usuario_instance)
 
@@ -124,7 +124,7 @@ def editar_perfil(request, user_id):
         perfil_form = UsuarioForm(request.POST, instance=usuario_instance)
         if perfil_form.is_valid():
             perfil_form.save()
-            return redirect('perfil')  # Redirige a la página de perfil
+            return redirect('perfil')
     else:
         perfil_form = UsuarioForm(instance=usuario_instance)
 
@@ -158,5 +158,19 @@ def serialize_dispositivos(dispositivos):
 
     return serialized_dispositivos
 
+#######
 
+from django.shortcuts import render, redirect
+from .forms import GeneracionEnergiaForm
+
+def API_energia(request):
+    if request.method == 'POST':
+        form = GeneracionEnergiaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('API_energia')
+    else:
+        form = GeneracionEnergiaForm()
+
+    return render(request, 'API_energia.html', {'form': form})
 

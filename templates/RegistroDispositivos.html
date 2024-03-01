@@ -18,72 +18,81 @@
     <div id="registroDispositivos">
         <h1>Registra tus Dispositivos</h1>
 
-        <form action="{% url 'RegistroDispositivos' %}" method="POST">
-            {% csrf_token %}
-            {% if mensaje %}
-                <div class="alert alert-success" role="alert">
-                    Dispositivo registrado exitosamente!
-                </div>
-            {% endif %}
+ <form action="{% url 'RegistroDispositivos' %}" method="POST">
+    {% csrf_token %}
+    {% if mensaje %}
+        <div class="alert alert-success" role="alert">
+            Dispositivo registrado exitosamente!
+        </div>
+    {% endif %}
 
-            <!-- Formulario de Dispositivos -->
-            <div id="formularioDispositivos">
+    <div id="formularioDispositivos">
 
-                <label for="nombre_dispositivo">Nombre del Dispositivo:</label>
-                <input type="text" name="nombre_dispositivo" id="nombreDispositivo" required>
+        <label for="nombre_dispositivo">Nombre del Dispositivo:</label>
+        <input type="text" name="nombre_dispositivo" id="nombreDispositivo" required>
 
-                <label for="cantidad_dispositivo">Cantidad de Dispositivos:</label>
-                <input type="number" name="cantidad_dispositivo" id="cantidadDispositivos" required>
+        <label for="cantidad_dispositivo">Cantidad de Dispositivos:</label>
+        <input type="number" name="cantidad_dispositivo" id="cantidadDispositivos" required>
 
-                <label for="consumo_hora">Horas de Uso Diarias por Dispositivo:</label>
-                <input type="number" name="consumo_hora" id="horasUso" required>
+        <label for="consumo_hora">Horas de Uso Diarias por Dispositivo:</label>
+        <input type="number" name="consumo_hora" id="horasUso" required>
 
-                <label for="cantidad_consumo">Potencia por Dispositivo (KW):</label>
-                <input type="number" name="cantidad_consumo" id="cantidadW" step="0.01" required>
+        <label for="cantidad_consumo">Potencia por Dispositivo (KW):</label>
+        <input type="number" name="cantidad_consumo" id="cantidadW" step="0.01" required>
 
+<select name="generador_energia" id="generador_energia">
+    <option value="" selected>Seleccione un generador de energía (opcional)</option>
+    {% for generador in generadores_energia %}
+        <option value="{{ generador.id }}" data-capacidad-generacion="{{ generador.capacidad_generacion }}">{{ generador.tipo_energia }} - {{ generador.capacidad_generacion }} kW</option>
+    {% endfor %}
+</select>
+        <input type="button" value="Calcular Energía" onclick="registrarDispositivo()">
 
-                <input type="button" value="Calcular Energía" onclick="registrarDispositivo()">
+        <label for="total_energia">Total de Energía (KW-h):</label>
+        <input type="number" name="total_energia" id="total_energia" readonly>
+        <button type="button" class="btn" onclick="limpiarCampos()">Limpiar Campos</button>
+        <button type="submit" class="btn">Guardar registro</button>
 
-
-                <label for="total_energia">Total de Energía (KW-h):</label>
-                <input type="number" name="total_energia" id="total_energia" readonly>
- <button type="button" class="btn" onclick="limpiarCampos()">Limpiar Campos</button>
-                <button type="submit" class="btn">Guardar registro</button>
-
-            </div>
-        </form>
+    </div>
+</form>
     </div>
 
     <script>
-        function registrarDispositivo() {
+ function registrarDispositivo() {
+    var cantidadDispositivos = parseInt(document.getElementById('cantidadDispositivos').value);
+    var cantidadW = parseFloat(document.getElementById('cantidadW').value);
+    var horasUso = parseFloat(document.getElementById('horasUso').value);
 
-            var cantidadDispositivos = parseInt(document.getElementById('cantidadDispositivos').value);
-            var cantidadW = parseFloat(document.getElementById('cantidadW').value);
-            var horasUso = parseFloat(document.getElementById('horasUso').value);
+    if (isNaN(cantidadDispositivos) || isNaN(cantidadW) || isNaN(horasUso) ||
+        cantidadDispositivos <= 0 || cantidadW <= 0 || horasUso <= 0) {
+        alert('Por favor, complete todos los campos con valores válidos mayores a cero.');
+        return;
+    }
 
+    var total_energia = cantidadDispositivos * cantidadW * horasUso;
 
-            if (isNaN(cantidadDispositivos) || isNaN(cantidadW) || isNaN(horasUso) ||
-                cantidadDispositivos <= 0 || cantidadW <= 0 || horasUso <= 0) {
-                alert('Por favor, complete todos los campos con valores válidos mayores a cero.');
-                return;
-            }
+    var generador_energia = document.getElementById('generador_energia');
 
-            var total_energia = cantidadDispositivos * cantidadW * horasUso;
+    if (generador_energia.value !== "") {
+        var generador_energia_value = parseFloat(generador_energia.options[generador_energia.selectedIndex].dataset.capacidadGeneracion);
+        total_energia -= generador_energia_value;
+    }
 
-            document.getElementById('total_energia').value = total_energia.toFixed(2);
-        }
- function guardarYLimpiar() {
+    document.getElementById('total_energia').value = total_energia.toFixed(2);
+}
 
-            limpiarCampos();
-        }
+function guardarYLimpiar() {
+    limpiarCampos();
+}
 
-        function limpiarCampos() {
-            document.getElementById('nombreDispositivo').value = '';
-            document.getElementById('cantidadDispositivos').value = '';
-            document.getElementById('horasUso').value = '';
-            document.getElementById('cantidadW').value = '';
-            document.getElementById('total_energia').value = '';
-        }
+function limpiarCampos() {
+    document.getElementById('nombreDispositivo').value = '';
+    document.getElementById('cantidadDispositivos').value = '';
+    document.getElementById('horasUso').value = '';
+    document.getElementById('cantidadW').value = '';
+    document.getElementById('total_energia').value = '';
+    document.getElementById('generador_energia').value = ''; // Limpiar la selección del generador de energía
+}
     </script>
 </body>
 <a href="http://127.0.0.1:8000/presentacion" class="boton-volver">Atras</a>

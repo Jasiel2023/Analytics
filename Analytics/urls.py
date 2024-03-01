@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from aplicacion import views
+from aplicacion.views import API_energia
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
@@ -30,6 +31,7 @@ path('GenerarInforme/', views.GenerarInforme, name='GenerarInforme'),
 path('Estadisticas/', views.Estadisticas, name='Estadisticas'),
     path('registro/', views.registro, name='registro'),
     path('cerrarSesion/', views.cerrarSesion, name='cerrarSesion'),
-    path('Inicio/', views.inicio, name='inicio')
+    path('Inicio/', views.inicio, name='inicio'),
+path('API_energia/', views.API_energia, name='API_energia')
 
 ]

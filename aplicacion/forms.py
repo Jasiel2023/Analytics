@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Informe, Usuario
+from .models import Informe, Usuario, GeneracionEnergia
 from django import forms
 from . models import Dispositivo
 
@@ -34,15 +34,15 @@ class CustomUserCreationForm(UserCreationForm):
         ])
 
     def validate_password_similarity(self, password):
-        # Implementa tu lógica de validación de similitud con información personal
+
         pass
 
     def validate_common_password(self, password):
-        # Implementa tu lógica de validación de contraseña común
+
         pass
 
     def validate_numeric_password(self, password):
-        # Validar que la contraseña no sea completamente numérica
+
         if password.isdigit():
             raise forms.ValidationError("La contraseña no puede ser completamente numérica.")
 
@@ -56,3 +56,16 @@ class CustomUserCreationForm(UserCreationForm):
             self.add_error('password1', forms.ValidationError(error_messages))
 
         return password
+
+    #########
+
+    from django import forms
+    from .models import GeneracionEnergia
+
+
+
+class GeneracionEnergiaForm(forms.ModelForm):
+    class Meta:
+        model = GeneracionEnergia
+        fields = '__all__'
+    pass
