@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil</title>
-    <!-- Agrega tus enlaces a estilos CSS si los necesitas -->
     <link rel="stylesheet" href="tu_archivo_css.css">
 </head>
 <style>
@@ -67,29 +66,29 @@ button {
 button:hover {
     background-color: #2980b9;
 }
-              .boton-volver {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            padding: 10px 15px;
-            background-color: #757575;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
+.boton-volver {
+    position: fixed;
+    top: 30px;
+    left: 30px;
+    padding: 10px 15px;
+    background-color: #fff;
+    color: #000;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    border: 1px solid #000;
+}
 
-        .boton-volver:hover {
-            background-color: #444;
-        }
+.boton-volver:hover {
+    background-color: #eee;
+}
 </style>
 <body>
 
 {% if has_perfil %}
-<h1>Crear Perfil</h1>
-
+    <h1>Crear Perfil</h1>
 {% else %}
-  <h1>Editar Perfil</h1>
+    <h1>Editar Perfil</h1>
 {% endif %}
 
 <form method="post" action="">
@@ -98,30 +97,28 @@ button:hover {
     <input type="text" id="nombres" name="nombres" value="{{ perfil_form.instance.user.username }}" required disabled>
 
     <label for="cedula">Cédula:</label>
-    <input type="text" id="cedula" name="cedula" value="{{ perfil_form.cedula.value }}" required>
+    <input type="text" id="cedula" name="cedula" value="{{ perfil_form.instance.cedula }}" required>
 
     <label for="direccion">Dirección:</label>
-    <input type="text" id="direccion" name="direccion" value="{{ perfil_form.direccion.value }}">
+    <input type="text" id="direccion" name="direccion" value="{{ perfil_form.instance.direccion }}">
 
     <label for="gmail">Correo Electrónico:</label>
-    <input type="email" id="gmail" name="gmail" value="{{ perfil_form.gmail.value }}" required>
+    <input type="email" id="gmail" name="gmail" value="{{ perfil_form.instance.gmail }}" required>
 
-    <!-- Otros campos adicionales según tus necesidades -->
-
-    <button type="submit">{% if has_perfil %}Actualizar{% else %}Guardar{% endif %}</button>
+    <button type="submit">{% if has_perfil %}Guardar{% else %}Actualizar{% endif %}</button>
 </form>
 
 <script>
     const modoSwitch = document.getElementById('modoSwitch');
 
-    // Verificar si el modo oscuro está activado en el almacenamiento local
+
     const modoOscuroGuardado = localStorage.getItem('modoOscuro');
     if (modoOscuroGuardado) {
         document.body.classList.toggle('dark-mode', JSON.parse(modoOscuroGuardado));
         modoSwitch.checked = JSON.parse(modoOscuroGuardado);
     }
 </script>
-  <a href="http://127.0.0.1:8000/presentacion" class="boton-volver">Volver</a>
+  <a href="http://127.0.0.1:8000/presentacion" class="boton-volver">Atras</a>
 </body>
 </html>
 

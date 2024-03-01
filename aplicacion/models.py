@@ -12,7 +12,8 @@ class Usuario(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     cedula = models.CharField(max_length=10, blank=True, null=True)
     gmail = models.EmailField(blank=True, null=True)
-    direccion = models.TextField()
+    direccion = models.TextField(blank=True, null=True)  # Permitir nulo en el campo dirección
+
     def __str__(self):
         return self.user.username
 class MedidorDeConsumo(models.Model):

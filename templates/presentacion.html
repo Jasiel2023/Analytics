@@ -209,48 +209,6 @@ input:checked + .slider:before {
     padding: 0;
 }
 
-        .btn-notificacion {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background-color: #FF6666;
-            color: #fff;
-            font-size: 20px;
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            cursor: pointer;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s ease;
-            z-index: 1000;
-        }
-
-        .btn-notificacion:hover {
-            background-color: #CC3333;
-        }
-
-        .recuadro {
-            display: none;
-            position: fixed;
-            bottom: 70px;
-            right: 10px;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            padding: 10px;
-            border-radius: 5px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-            z-index: 999;
-        }
-
-
-        .notificacion-contenedor {
-
-        }
-
-        .notificacion {
-            margin-bottom: 10px;
-        }
 #respuesta {
     margin-top: 20px;
 }
@@ -336,53 +294,13 @@ modoSwitch.addEventListener('input', () => {
     <label for="userInput" style="display: none;">Tu consulta:</label>
     <input type="text" id="userInput" placeholder="Realiza tu consulta...">
     <span class="lupa-icon" onclick="enviarConsulta()">&#128269;</span>
-
-    <button id="enviarButton">Enviar</button>
+    <button id="enviarButton" onclick="enviarConsulta()">Enviar</button>
 </div>
 
 <div id="respuesta"></div>
 
-      <button class="btn-notificacion" onclick="mostrarNotificaciones()">⚠</button>
+<script>
 
-
-    <div id="contenedorRecuadro" class="recuadro">
-
-        <div id="contenedorNotificaciones" class="notificacion-contenedor">
-
-        </div>
-    </div>
-
-    <script>
-        function mostrarNotificaciones() {
-            const contenedorRecuadro = document.getElementById('contenedorRecuadro');
-            const contenedorNotificaciones = document.getElementById('contenedorNotificaciones');
-
-
-            contenedorRecuadro.style.display = contenedorRecuadro.style.display === 'none' ? 'block' : 'none';
-
-
-            if (contenedorRecuadro.style.display === 'block') {
-
-                contenedorNotificaciones.innerHTML = '';
-                verificarConsumoDispositivos(contenedorNotificaciones);
-            }
-        }
-
-
-        function verificarConsumoDispositivos(contenedor) {
-            {% for dispositivo in dispositivos %}
-                var totalEnergia = {{ dispositivo.total_energia }};
-                var nombre = "{{ dispositivo.nombre_dispositivo }}";
-
-                if (totalEnergia > 1000) {
-                    var dispositivoInfo = document.createElement('div');
-                    dispositivoInfo.className = 'notificacion';
-                    dispositivoInfo.innerHTML = `Este dispositivo: ${nombre}, está consumiendo: ${totalEnergia} KW, lo cual es un exceso de energía. `;
-
-                    contenedor.appendChild(dispositivoInfo);
-                }
-            {% endfor %}
-        }
     function enviarConsulta() {
         var userInput = document.getElementById('userInput').value;
         var apiKey = 'AIzaSyAqhUSex2MzrOIOVDEgI_-sjfkIfYDLDbE';
@@ -400,8 +318,7 @@ modoSwitch.addEventListener('input', () => {
         respuestaDiv.innerHTML = '';
 
         if (data.items && data.items.length > 0) {
-            for (var i = 0; i < data.items.length; i++) {
-                var resultado = data.items[i];
+            data.items.forEach(resultado => {
                 var enlace = resultado.link;
                 var titulo = resultado.title;
                 var snippet = resultado.snippet;
@@ -410,7 +327,7 @@ modoSwitch.addEventListener('input', () => {
                 resultadoDiv.innerHTML = `<h3><a href="${enlace}" target="_blank">${titulo}</a></h3><p>${snippet}</p>`;
 
                 respuestaDiv.appendChild(resultadoDiv);
-            }
+            });
         } else {
             respuestaDiv.innerHTML = '<p>No se encontraron resultados.</p>';
         }

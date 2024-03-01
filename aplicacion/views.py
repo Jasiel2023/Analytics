@@ -1,11 +1,9 @@
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
-from django.contrib.auth import login, logout, authenticate
-from django.db import IntegrityError
+from django.contrib.auth import logout, authenticate
 from . forms import DispositivoForm
-from django.shortcuts import redirect
 from .models import Dispositivo
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
 from .models import Usuario
 from .forms import UsuarioForm
@@ -14,22 +12,36 @@ from itertools import groupby
 def index(request):
     return render(request, 'index.html')
 
+from django.contrib.auth.forms import UserCreationForm
+from django.db import IntegrityError
+from django.contrib.auth import login
+from django.shortcuts import render, redirect
+from .forms import CustomUserCreationForm
+
 def registro(request):
     if request.method == 'GET':
-        return render(request, 'registro.html', {'form': UserCreationForm})
-    else:
-        if request.POST['password1'] == request.POST['password2']:
-            try:
-                user = User.objects.create_user(username=request.POST['username'],
-                                                password=request.POST['password1'])
-                user.save()
-                login(request, user)
-                return redirect('presentacion')
-            except IntegrityError:
-                return render(request, 'registro.html', {'form': UserCreationForm,
-                                              "error": 'Username ya existe'})
-        return render(request, 'registro.html', {'form': UserCreationForm,
-                                                 "error": 'Contraseña no coincide'})
+        return render(request, 'registro.html', {'form': UserCreationForm()})
+    elif request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            if request.POST['password1'] == request.POST['password2']:
+                try:
+                    user = User.objects.create_user(username=request.POST['username'],
+                                                    password=request.POST['password1'])
+                    user.save()
+                    login(request, user)
+                    return redirect('presentacion')
+                except IntegrityError:
+                    return render(request, 'registro.html', {'form': UserCreationForm(),
+                                                              "error": 'Username ya existe'})
+            else:
+                return render(request, 'registro.html', {'form': UserCreationForm(),
+                                                         "error": 'Contraseña no coincide'})
+        else:
+            error_message = form.errors.get('password1', '')
+            return render(request, 'registro.html', {'form': CustomUserCreationForm(),
+                                                     "error": f'Contraseña no cumple con los requisitos! {error_message}'})
+
 
 def inicio(request):#ojo a esto
     return render(request, 'inicio.html')
@@ -87,8 +99,10 @@ def presentacion(request):
 
     return render(request, 'presentacion.html', context)
 
-def perfil(request):
+from django.urls import reverse
+from django.shortcuts import redirect
 
+def perfil(request):
     usuario_instance, created = Usuario.objects.get_or_create(user=request.user)
     has_perfil = created
 
@@ -96,7 +110,7 @@ def perfil(request):
         perfil_form = UsuarioForm(request.POST, instance=usuario_instance)
         if perfil_form.is_valid():
             perfil_form.save()
-            return HttpResponseRedirect('/')
+            return redirect('perfil')  # Redirige a la página de perfil
     else:
         perfil_form = UsuarioForm(instance=usuario_instance)
 
@@ -110,7 +124,7 @@ def editar_perfil(request, user_id):
         perfil_form = UsuarioForm(request.POST, instance=usuario_instance)
         if perfil_form.is_valid():
             perfil_form.save()
-            return HttpResponseRedirect('/')
+            return redirect('perfil')  # Redirige a la página de perfil
     else:
         perfil_form = UsuarioForm(instance=usuario_instance)
 
